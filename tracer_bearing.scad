@@ -21,6 +21,9 @@ retainer_tolerance=.4;
 tracer_pulley_t = 5;
 tracer_pulley_attach = .1;
 
+tracer_pulley_center_z = shell_t+journal_t/2+journal_tolerance_z/2+tracer_pulley_t/2-tracer_pulley_attach;
+//tracer_pulley_center_z =0;
+//tracer_pulley_center_z =0;
 /*
 shell_r = inner_hole_r + inner_shell_wall + outer_shell_wall + inner_outer_tolerance + flange_w ;
 inner_shell_h = journal_t + shell_t*2 + retainer_t*2 + journal_tolerance_z+retainer_tolerance*2;
@@ -77,7 +80,6 @@ tracer_journal();
 
 }
 //tracer_bearing_assembly();
-
 
 module tracer_bearing_print_all() {
 translate([0,0,0])

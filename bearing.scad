@@ -27,7 +27,7 @@ module bearing_holder(
             cylinder(r=od/2+wall, h=t+wall*2, center=true);
             cube([od+extra_length,tie_width,t+wall*2], center=true);
         }
-        cylinder(r=od/2-wall, h=t*2, center=true);
+        cylinder(r=od/2-wall, h=t*3, center=true);
         bearing();
         translate([od/2+wall+tie_hole_r,tie_hole_r*2,0])
         cylinder(r=tie_hole_r, h=t*2, center=true);
@@ -82,7 +82,7 @@ module bearing_holder_top(
 ) {
     
     difference() {
-        bearing_holder();
+        bearing_holder(od=od, t=t, wall=wall, cut=cut);
         translate([0,0,-od*3/2-cut])
         cube([od*2,od*3,od*3], center=true);
     }
