@@ -11,8 +11,12 @@ frame_rod_r = 6.5/2;
 frame_length = 500;
 
 drive_axle_r = 8/2;
-drive_position_x = frame_x/2 - drive_axle_bearing_od/2 - bearing_holder_wall - frame_rod_r;
-drive_position_y = frame_y/2 - drive_axle_bearing_od/2 - bearing_holder_wall - frame_rod_r;
+//inboard
+//drive_position_x = frame_x/2 - drive_axle_bearing_od/2 - bearing_holder_wall - frame_rod_r;
+//drive_position_y = frame_y/2 - drive_axle_bearing_od/2 - bearing_holder_wall - frame_rod_r;
+//outboard
+drive_position_x = frame_x/2+ drive_axle_bearing_od/2+bearing_pillow_rim_t;
+drive_position_y = 0;
 drive_axle_bearing_od = 22;
 
 module frame_rod(r = frame_rod_r, h = frame_length) {

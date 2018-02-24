@@ -9,7 +9,7 @@ outer_shell_wall = shell_wall/2;
 shell_t = 2; 
 flange_w = shell_t*2;
 inner_outer_tolerance = .8;
-journal_t = 2;
+journal_t = 3;
 journal_tolerance = 1.2;
 journal_tolerance_z = .6;
 

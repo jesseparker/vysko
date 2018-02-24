@@ -35,27 +35,55 @@ module strut_2d(x=frame_x, y=frame_y, r = frame_rod_r, meat_factor=.4, ring_r = 
                 translate([-y/2,-r*meat_factor/2])
                     square(size = [y,r*meat_factor]);
             circle(r=ring_r);
+            translate([x/2,-(drive_axle_bearing_od+bearing_pillow_rim_t*2)/2])
+                square(size = [drive_axle_bearing_od/2+bearing_pillow_rim_t,drive_axle_bearing_od+bearing_pillow_rim_t*2]);
+
         }
         circle(r=ring_r-r*meat_factor);
+        // rod slots
+        translate([-x/2-frame_rod_r,-y/2-frame_rod_r*6])
+            square(size = [frame_rod_r*2,frame_rod_r*6]);
+        translate([x/2-frame_rod_r,-y/2-frame_rod_r*6])
+            square(size = [frame_rod_r*2,frame_rod_r*6]);
+        translate([-x/2-frame_rod_r,y/2-frame_rod_r])
+            square(size = [frame_rod_r*2,frame_rod_r*6]);
+        translate([x/2-frame_rod_r,y/2-frame_rod_r])
+            square(size = [frame_rod_r*2,frame_rod_r*6]);
     }
 }
+//strut_2d();
 
-module strut(ring_r = 100, h =2, r = frame_rod_r+1, meat_factor=.4) {
+module strut(ring_r = 100, h =3, r = frame_rod_r+1, meat_factor=.6) {
     difference() {
         linear_extrude(height=h) strut_2d(r = r, ring_r = ring_r, meat_factor = meat_factor);
         translate([0,0,-frame_length/2])
         frame_rods(r = frame_rod_r+1);
         //translate([frame_x/2/2,frame_y/2,drive_axle_bearing_t/2+1])
-     translate([drive_position_x,drive_position_y,0])
-        translate([0,0,drive_axle_bearing_t/2+bearing_holder_wall-1])
-        rotate(-45,[0,0,1])
-        bearing_holder_negative();
+     //translate([drive_position_x,drive_position_y,0])
+        //translate([0,0,drive_axle_bearing_t/2+bearing_holder_wall-1])
+        //rotate(-45,[0,0,1])
+        //bearing_holder_negative();
+    translate([drive_position_x,drive_position_y,0])
+    translate([0,0,drive_axle_bearing_t/2+bearing_pillow_side_t])
+        rotate(-90,[0,0,1])
+            bearing_holder_negative();
+        
         
     }
+    // Inboard bearing holder
+    //translate([drive_position_x,drive_position_y,0])
+    //translate([0,0,drive_axle_bearing_t/2+bearing_holder_wall])
+    //    rotate(-45,[0,0,1])
+    //        bearing_holder_bottom();
+    
+    // Outboard bearing holder
     translate([drive_position_x,drive_position_y,0])
-    translate([0,0,drive_axle_bearing_t/2+bearing_holder_wall])
-        rotate(-45,[0,0,1])
-            bearing_holder_bottom();
+    translate([0,0,drive_axle_bearing_t/2+bearing_pillow_side_t])
+        rotate(-90,[0,0,1])
+            bearing_pillow_bottom();
+
 }
 
-//strut(ring_r = 35);
+
+
+//strut(ring_r = 45);
