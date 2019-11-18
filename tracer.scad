@@ -1,4 +1,5 @@
 include <tracer_bearing.scad>
+include <strut.scad>
 use <rb-pulleys.scad>
 use <rods.scad>
 
@@ -18,10 +19,10 @@ difference() {
     }
 translate([0,0,h])
     rotate(180,[0,1,0])
-    strut(ring_r = r1);
+    strut(ring_r = r1,do_bearing = 0);
 
 }
-
+funnel();
 //projection(cut=true)
 //rotate(90,[1,0,0])
 //translate([0,0,60+2])
@@ -34,7 +35,9 @@ translate([0,0,h])
 module tracer_plate(t=2) {
     
 translate([0,0,0]) {
-    
+    translate([0,0,tracer_pulley_t-tracer_pulley_attach])
+    rotate(15,[0,0,1])
+    tracer_connect_tabs();
 difference() {
     cylinder(r=shell_r, h=t);
         tracer_center_hole();
@@ -77,7 +80,6 @@ module spinner_strut(h=60, r1 = 40, r2=2, hole_r=1, wall = 1) {
 }
 
 //spinner_strut();
-//translate([0,0,-3])
-tracer_inner_shell();
+//translate([0,0,10])
+//tracer_inner_shell();
 
-translate([0,0,-10])

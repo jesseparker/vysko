@@ -1,17 +1,18 @@
+$fn=30;
 drive_axle_r = 8.1/2;
 drive_axle_bearing_id = 8;
 drive_axle_bearing_od = 22.5;
-drive_axle_bearing_t = 7;
+drive_axle_bearing_t = 8;
 
 bearing_holder_wall = 1.2;
 bearing_holder_tie_hole_r = 3/2;
 bearing_holder_cut = -1;
 
-bearing_pillow_rim_t = 3;
+bearing_pillow_rim_t = 2;
 bearing_pillow_side_t = 1.5;
 bearing_pillow_screw_thread_r = 3/2;
-bearing_pillow_screw_shank_r = 5/2;
-bearing_pillow_screw_head_r = 8/2;
+bearing_pillow_screw_shank_r = 4/2;
+bearing_pillow_screw_head_r = 6/2;
 
 module bearing(id = drive_axle_bearing_id, od = drive_axle_bearing_od, t = drive_axle_bearing_t) {
     difference() {
@@ -136,31 +137,45 @@ module bearing_holder_keyway(
 }
 
 module bearing_pillow() {
+
     difference() {
-      cylinder(r=drive_axle_bearing_od/2 + bearing_pillow_rim_t, h=drive_axle_bearing_t + bearing_pillow_side_t*2, center=true);
+        union() {
+            cylinder(r=drive_axle_bearing_od/2 + bearing_pillow_rim_t, h=drive_axle_bearing_t + bearing_pillow_side_t*2, center=true);
+            cube([drive_axle_bearing_od+bearing_pillow_rim_t*2+bearing_pillow_screw_head_r*4+2,12,drive_axle_bearing_t + bearing_pillow_side_t*2], center=true);
+        }
       cylinder(r=drive_axle_bearing_od/2 - 1, h=drive_axle_bearing_t*8, center=true);
       bearing();
-      translate([drive_axle_bearing_od/2+bearing_pillow_rim_t/2,0,0])
+        
+      translate([drive_axle_bearing_od/2+bearing_pillow_rim_t+bearing_pillow_screw_head_r,0,0])
         rotate(90,[1,0,0]) 
-            cylinder(r=bearing_pillow_screw_thread_r/2, h=50, center=true);
-      translate([drive_axle_bearing_od/2+bearing_pillow_rim_t/2,10,0])
+            cylinder(r=bearing_pillow_screw_thread_r, h=50, center=true);
+      translate([drive_axle_bearing_od/2+bearing_pillow_rim_t+bearing_pillow_screw_head_r,10,0])
         rotate(90,[1,0,0]) 
-            cylinder(r=bearing_pillow_screw_shank_r/2, h=20, center=true);
-      translate([drive_axle_bearing_od/2+bearing_pillow_rim_t/2,13,0])
+            cylinder(r=bearing_pillow_screw_shank_r, h=20, center=true);
+      translate([drive_axle_bearing_od/2+bearing_pillow_rim_t+bearing_pillow_screw_head_r,15,0])
         rotate(90,[1,0,0]) 
-            cylinder(r=bearing_pillow_screw_head_r/2, h=20, center=true);
+            cylinder(r=bearing_pillow_screw_head_r, h=20, center=true);
 
-      translate([-drive_axle_bearing_od/2-bearing_pillow_rim_t/2,0,0])
+      translate([-drive_axle_bearing_od/2-bearing_pillow_rim_t-bearing_pillow_screw_head_r,0,0])
         rotate(90,[1,0,0]) 
-            cylinder(r=bearing_pillow_screw_thread_r/2, h=50, center=true);
-      translate([-drive_axle_bearing_od/2-bearing_pillow_rim_t/2,10,0])
+            cylinder(r=bearing_pillow_screw_thread_r, h=50, center=true);
+      translate([-drive_axle_bearing_od/2-bearing_pillow_rim_t-bearing_pillow_screw_head_r,10,0])
         rotate(90,[1,0,0]) 
-            cylinder(r=bearing_pillow_screw_shank_r/2, h=20, center=true);
-      translate([-drive_axle_bearing_od/2-bearing_pillow_rim_t/2,13,0])
+            cylinder(r=bearing_pillow_screw_shank_r, h=20, center=true);
+      translate([-drive_axle_bearing_od/2-bearing_pillow_rim_t-bearing_pillow_screw_head_r,15,0])
         rotate(90,[1,0,0]) 
-            cylinder(r=bearing_pillow_screw_head_r/2, h=20, center=true);
+            cylinder(r=bearing_pillow_screw_head_r, h=20, center=true);
     }
 }
+module bearing_pillow_negative() {
+
+    cylinder(r=drive_axle_bearing_od/2 + bearing_pillow_rim_t, h=drive_axle_bearing_t + bearing_pillow_side_t*2, center=true);
+    cylinder(r=drive_axle_bearing_od/2 + bearing_pillow_rim_t-1, h=drive_axle_bearing_t *4, center=true);
+    cube([drive_axle_bearing_od+bearing_pillow_rim_t*2+bearing_pillow_screw_head_r*4+2,12,drive_axle_bearing_t + bearing_pillow_side_t*2], center=true);
+
+}
+//%bearing_pillow();
+//bearing_pillow_negative();
 module bearing_pillow_top() {
    difference() {
         bearing_pillow();
@@ -176,6 +191,8 @@ module bearing_pillow_bottom() {
    } 
 }
 //bearing_pillow_top();
+//translate([0,-5,0])
 //bearing_pillow_bottom();
 //bearing_pillow();
+//bearing_holder();
 //bearing();

@@ -1,7 +1,7 @@
 include <hollow_bearing.scad>
 use <rb-pulleys.scad>
 
-//$fn = 360;
+$fn = 100;
 inner_hole_r = 35;
 shell_wall = 2;
 inner_shell_wall = shell_wall;
@@ -19,6 +19,7 @@ retainer_w = retainer_d*2+inner_outer_tolerance;
 retainer_tolerance=.4;
 
 tracer_pulley_t = 5;
+tracer_single_pulley_t = 7;
 tracer_pulley_attach = .1;
 
 tracer_pulley_center_z = shell_t+journal_t/2+journal_tolerance_z/2+tracer_pulley_t/2-tracer_pulley_attach;
@@ -31,17 +32,32 @@ outer_shell_h = journal_t + shell_t +journal_tolerance_z;
 
 */
 
+module tracer_connect_tabs() {
+    difference() {
+        union() {
+            translate([inner_hole_r,0,-tracer_pulley_t+tracer_pulley_attach])
+                cylinder(r=5,h=2);
+            translate([-inner_hole_r,0,-tracer_pulley_t+tracer_pulley_attach])
+                cylinder(r=5,h=2);
+        }
+         translate([-inner_hole_r+2,0,-tracer_pulley_t+tracer_pulley_attach])
+            cylinder(r=1.5,h=10,center=true);
+         translate([inner_hole_r-2,0,-tracer_pulley_t+tracer_pulley_attach])
+            cylinder(r=1.5,h=10,center=true);
+    }    
+}
 module tracer_inner_shell() {
-    translate();
+
     inner_shell();
     translate([0,0,-tracer_pulley_t/2+tracer_pulley_attach])
     belt_pulley(
         d = shell_r*2-4,
         shaft_d=inner_hole_r*2,
-        belt_width=2,
+        belt_width=3,
         slope=.5,
         t= tracer_pulley_t
     );
+    tracer_connect_tabs();
 }
 
 //tracer_inner_shell();

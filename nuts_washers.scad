@@ -53,7 +53,7 @@ module nut_1_4() {
 module nut_5_16() {
     nut(
         h= .27 * in,
-        od= .57 * in,
+        od= .59 * in,
         id= .27 * in
     );
 }

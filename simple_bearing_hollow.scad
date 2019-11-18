@@ -1,19 +1,33 @@
 // <senorjp@gmail.com> December 2017
+// Made a Customizer Nov 2018
 //
 // Simple bearing with hollow center
 //
+$fn=200;
+/* [Global] */
 
-inner_hole_r = 10;
-inner_shell_wall = 2;
+// Parts assembled, or A set of parts to print?
+render_assembly = 1; // [1:Assembly,0:Ready to print]
+
+// Diameter of center hole in mm
+center_bore_diameter = 20;
+
+// Thickness of the mechanism
+wall_thickness = 2;
+
+/* [Hidden] */
+
+inner_hole_r = center_bore_diameter/2;
+inner_shell_wall = wall_thickness;
 outer_shell_wall = inner_shell_wall/2;
-shell_t = 2; 
+shell_t = wall_thickness; 
 flange_w = shell_t*2;
 inner_outer_tolerance = .8;
-journal_t = 2;
+journal_t = wall_thickness;
 journal_tolerance = 1.2;
 journal_tolerance_z = .6;
 
-retainer_t = 1;
+retainer_t = wall_thickness/2;
 retainer_d = inner_shell_wall/2;
 retainer_w = retainer_d*2+inner_outer_tolerance;
 retainer_tolerance=.4;
@@ -130,7 +144,7 @@ journal();
 //}
 
 }
-//hollow_bearing_assembly();
+
 
 
 module hollow_bearing_print_all() {
@@ -147,5 +161,9 @@ translate([shell_r+flange_w*3+inner_hole_r,shell_r+flange_w*2+inner_hole_r,retai
     
 }
 
-
-hollow_bearing_print_all();
+if (render_assembly) {
+    hollow_bearing_assembly();
+}
+else {
+    hollow_bearing_print_all();
+}
