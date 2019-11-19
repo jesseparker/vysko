@@ -32,6 +32,13 @@ outer_shell_h = journal_t + shell_t +journal_tolerance_z;
 
 */
 
+module tracer_connect_holes() {
+         translate([-inner_hole_r+2,0,-tracer_pulley_t+tracer_pulley_attach])
+            cylinder(r=1.5,h=20,center=true);
+         translate([inner_hole_r-2,0,-tracer_pulley_t+tracer_pulley_attach])
+            cylinder(r=1.5,h=20,center=true);
+}
+
 module tracer_connect_tabs() {
     difference() {
         union() {
@@ -40,12 +47,11 @@ module tracer_connect_tabs() {
             translate([-inner_hole_r,0,-tracer_pulley_t+tracer_pulley_attach])
                 cylinder(r=5,h=2);
         }
-         translate([-inner_hole_r+2,0,-tracer_pulley_t+tracer_pulley_attach])
-            cylinder(r=1.5,h=10,center=true);
-         translate([inner_hole_r-2,0,-tracer_pulley_t+tracer_pulley_attach])
-            cylinder(r=1.5,h=10,center=true);
+        tracer_connect_holes();
     }    
 }
+//tracer_connect_tabs();
+
 module tracer_inner_shell() {
 
     inner_shell();
