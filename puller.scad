@@ -2,56 +2,51 @@ include <settings.scad>;
 use <gears/gears.scad>;
 include <rods.scad>;
 
-bevel_gear_pair(modul=3.1, gear_teeth=11, pinion_teeth=11, axis_angle=90, tooth_width=6, bore=4, pressure_angle = 20, helix_angle=20, together_built=true);
+/*
+bevel_gear_pair(modul=3.1, gear_teeth=31, pinion_teeth=11, axis_angle=90, tooth_width=6, bore=4, pressure_angle = 20, helix_angle=20, together_built=true);
+//3.1 = d/11
+//d=3.1*11
+translate([0,0,-9])
+cylinder(r=(3.1*31)/2, h=10, center=true);
+*/
 
 frame_rods();
 
-puller_d=30;
-puller_w=20;
 
-train_x=drive_position_x-puller_w/2;
-train_y=puller_d/2;
+gear_ratio = 1/3;
+smidge=.001;
+gear_t=5;
 
-gear_ratio = 1/2;
+gear_d = 30;
 
+gear_offset = gear_d-(gear_d*gear_ratio/2);
 
-gear_d_lg = train_x/(1.5+1*gear_ratio);
-gear_ratio = 1/2;
-gear_d_sm = gear_d_lg * gear_ratio;
+module fakegear(h=gear_t, d=gear_d, ratio=gear_ratio) {
+    translate([0,0,h/2])
+    cylinder(r=d/2, h=h, center=true);
+    translate([0,0,h+h/2-smidge])
+    cylinder(r=d*ratio/2, h=h, center=true);
+}
+translate([drive_position_x-20/2-gear_d/2,drive_position_y,0])
+fakegear();
 
-gear_b_y = gear_d_sm/2+gear_d_lg/2;
+translate([drive_position_x-20/2-gear_d/2-gear_offset,0,gear_t])
+fakegear();
 
-gear_b_x = drive_position_x-gear_d_lg-gear_d_sm/2-gear_d_lg/2;
+translate([drive_position_x-20/2-gear_d/2-gear_offset,gear_offset,gear_t*2])
+fakegear();
 
 // horizontal
-translate([drive_position_x,drive_position_y,100])
-cylinder(r=gear_d_lg/2, h=10, center=true);
+translate([drive_position_x,drive_position_y,0])
+cylinder(r=20/2, h=gear_t, center=true);
 
-//  a
-translate([drive_position_x-gear_d_lg,0,100])
-cylinder(r=gear_d_lg/2, h=10, center=true);
-
-translate([drive_position_x-gear_d_lg,0,100-10])
-cylinder(r=gear_d_sm/2, h=10, center=true);
-
-// b
-translate([drive_position_x-gear_d_lg,gear_b_y,100-10])
-cylinder(r=gear_d_lg/2, h=10, center=true);
-
-translate([drive_position_x-gear_d_lg,gear_b_y,100])
-cylinder(r=gear_d_sm/2, h=10, center=true);
-
-// c
-translate([gear_b_x,gear_b_y,100])
-cylinder(r=gear_d_lg/2, h=10, center=true);
-
-translate([gear_b_x,gear_b_y,100-10])
-cylinder(r=gear_d_sm/2, h=10, center=true);
+puller_w=(drive_position_x-20/2-gear_d/2-gear_offset-gear_d*gear_ratio/2)*2;
 
 //pull wheel
-translate([0,20,100-20])
+translate([0,gear_offset,gear_t*3+gear_offset])
 rotate(90,[0,1,0])
-cylinder(r=puller_d/2, h=puller_w, center=true);
-translate([0,-20,100-20])
+cylinder(r=gear_offset, h=puller_w, center=true);
+
+translate([0,-gear_offset,gear_t*3+gear_offset])
 rotate(90,[0,1,0])
-cylinder(r=puller_d/2, h=puller_w, center=true);
+cylinder(r=gear_offset, h=puller_w, center=true);
