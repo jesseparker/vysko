@@ -1,7 +1,7 @@
 //
 //$fn = 100;
 $fn = 30;
-
+smidge=.01;
 ///// You can change these values easily /////
 
 frame_x =5*25.4;
@@ -64,6 +64,6 @@ spool_d = 15; // main cylinder diameter
 spool_h = 35; // main cylinder height
 spool_hole = spool_d - 4; // hole diameter
 spool_slope=1/6; // angle of conical section
-
+spool_shaft_tol=2;
 
 
