@@ -21,6 +21,8 @@ module belt_pulley(
     }
 }
 
+//belt_pulley();
+
 module double_pulley(
     d1=15,
     d2=10,

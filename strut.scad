@@ -1,7 +1,9 @@
+include <settings.scad>
 include <rods.scad>
 include <bearing.scad>
 
-module strut_2d(x=frame_x, y=frame_y, r = frame_rod_r, meat_factor=.4, ring_r = frame_x/2, do_bearing = 1) {
+
+module strut_2d(x=frame_x, y=frame_y, r = frame_rod_r, meat_factor=.4, ring_r = frame_x/2, do_bearing = 1, ring_translate = [0,0]) {
     
     difference() {
         union() {
@@ -41,19 +43,13 @@ module strut_2d(x=frame_x, y=frame_y, r = frame_rod_r, meat_factor=.4, ring_r = 
                     square(size = [drive_axle_bearing_od/2+bearing_pillow_rim_t,drive_axle_bearing_od+bearing_pillow_rim_t*2]);
             }
         }
+        translate(ring_translate)
         circle(r=ring_r-r*meat_factor);
-        // rod slots
-        translate([-x/2-frame_rod_r,-y/2-frame_rod_r*6])
-            square(size = [frame_rod_r*2,frame_rod_r*6]);
-        translate([x/2-frame_rod_r,-y/2-frame_rod_r*6])
-            square(size = [frame_rod_r*2,frame_rod_r*6]);
-        translate([-x/2-frame_rod_r,y/2-frame_rod_r])
-            square(size = [frame_rod_r*2,frame_rod_r*6]);
-        translate([x/2-frame_rod_r,y/2-frame_rod_r])
-            square(size = [frame_rod_r*2,frame_rod_r*6]);
+
+        rod_slots_2d();
     }
 }
-//strut_2d();
+//strut_2d(ring_r=10, ring_translate = [20,10]);
 
 module strut(ring_r = 100, h =3, r = frame_rod_r+1, meat_factor=.6, do_bearing = 1) {
     difference() {
@@ -95,7 +91,77 @@ module strut(ring_r = 100, h =3, r = frame_rod_r+1, meat_factor=.6, do_bearing =
     polygon([ [0,0], [0,drive_axle_bearing_t+bearing_pillow_side_t*2], [10,0]]);
             }
 }
-
-
-
 //strut(ring_r = 45);
+
+module strut_diagonal(x=frame_x, y=frame_y, z=5, r = frame_rod_r, meat_factor=1, ring_r = 20, ring_translate = [0,0,0],do_bearing = 1) {
+    difference() {
+        hull() {             
+            translate([x/2,y/2])
+                cylinder(r=r+r*meat_factor, h=z, center=true);
+            
+
+            translate([-x/2,-y/2])
+                cylinder(r=r+r*meat_factor, h=z, center=true);
+            translate(ring_translate)
+                cylinder(r=ring_r+r*meat_factor, h=z, center=true);
+        }
+        frame_rods();
+        rod_slots();
+    }
+}
+//strut_diagonal();
+
+//strut_center_pulley();
+//roller();
+
+module strut_solid(x=frame_x, y=frame_y, z=5, r = frame_rod_r, meat_factor=1, ring_r = 20, ring_translate = [0,0,0],do_bearing = 1) {
+    difference() {
+        union() {
+        hull() {             
+            translate([x/2,y/2])
+                cylinder(r=r+r*meat_factor, h=z, center=true);
+            translate([-x/2,-y/2])
+                cylinder(r=r+r*meat_factor, h=z, center=true);
+            translate(ring_translate)
+                cylinder(r=ring_r+r*meat_factor, h=z, center=true);
+        }
+        hull() {             
+            translate([-x/2,y/2])
+                cylinder(r=r+r*meat_factor, h=z, center=true);
+            translate([x/2,-y/2])
+                cylinder(r=r+r*meat_factor, h=z, center=true);
+            translate(ring_translate)
+                cylinder(r=ring_r+r*meat_factor, h=z, center=true);
+        }
+        cube([x*.9,y*.9,z],center=true);
+    }
+        
+        frame_rods();
+        rod_slots();
+    
+}    
+}
+
+module strut_mono(x=frame_x, y=frame_y, z=5, r = frame_rod_r*1.5, meat_factor=1, ring_r = 10, ring_translate = [45,45,0],do_bearing = 1) {
+    difference() {
+        union() {
+        hull() {             
+            translate([x/2,y/2])
+                cylinder(r=r+r*meat_factor, h=z, center=true);
+            translate(ring_translate)
+                cylinder(r=ring_r+r*meat_factor, h=z, center=true);
+        }
+    }
+        
+        frame_rods();
+    
+        translate([x/2,y/2,0])
+        rotate(55,[0,0,1])
+        translate([0,10,0])
+        cube([frame_rod_r*2,20,20], center=true);
+        //rod_slots();
+    
+}    
+}
+
+

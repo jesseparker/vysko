@@ -66,4 +66,9 @@ spool_hole = spool_d - 4; // hole diameter
 spool_slope=1/6; // angle of conical section
 spool_shaft_tol=2;
 
-
+// rollers for winder 
+center_pulley_r = 10;
+center_pulley_t = 4;
+center_pulley_angle = 45;
+center_pulley_axle_r = 3;
+center_pulley_axle_l = 22;

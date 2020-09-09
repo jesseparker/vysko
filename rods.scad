@@ -20,10 +20,10 @@ drive_position_y = 0;
 drive_axle_bearing_od = 22;
 
 module frame_rod(r = frame_rod_r, h = frame_length) {
-    cylinder(r =r, h = h);
+    cylinder(r =r, h = h, center=true);
 }
 module drive_axle(r = drive_axle_r, h = frame_length) {
-    cylinder(r =r, h = h);
+    cylinder(r =r, h = h, center=true);
 }
 //frame_rod();
 
@@ -42,3 +42,30 @@ module frame_rods(x=frame_x, y = frame_y, r = frame_rod_r) {
 }
 
 //frame_rods();
+
+module rod_slots_2d(x=frame_x, y=frame_y) {
+        translate([-x/2-frame_rod_r,-y/2-frame_rod_r*6])
+            square(size = [frame_rod_r*2,frame_rod_r*6]);
+        translate([x/2-frame_rod_r,-y/2-frame_rod_r*6])
+            square(size = [frame_rod_r*2,frame_rod_r*6]);
+        translate([-x/2-frame_rod_r,y/2])
+            square(size = [frame_rod_r*2,frame_rod_r*6]);
+        translate([x/2-frame_rod_r,y/2])
+            square(size = [frame_rod_r*2,frame_rod_r*6]);    
+}
+
+module rod_slots_2d(x=frame_x, y=frame_y) {
+        translate([-x/2-frame_rod_r,-y/2-frame_rod_r*6])
+            square(size = [frame_rod_r*2,frame_rod_r*6]);
+        translate([x/2-frame_rod_r,-y/2-frame_rod_r*6])
+            square(size = [frame_rod_r*2,frame_rod_r*6]);
+        translate([-x/2-frame_rod_r,y/2])
+            square(size = [frame_rod_r*2,frame_rod_r*6]);
+        translate([x/2-frame_rod_r,y/2])
+            square(size = [frame_rod_r*2,frame_rod_r*6]);    
+}
+
+module rod_slots(h=10) {
+    linear_extrude(height=h, center=true) rod_slots_2d();
+}
+//rod_slots();
