@@ -4,20 +4,46 @@ $fn = 30;
 smidge=.01;
 ///// You can change these values easily /////
 
-frame_x =5*25.4;
+frame_x =120;
 frame_y = frame_x;
 frame_rod_diameter=8;
 
-bearing_diameter = 0.177*25.4; // .177 caliber BB
-//bearing_diameter = 30; // marble
+frame_rod_r = 6.5/2;
+frame_length = 500;
 
-hole_diameter = 20; // Hollow center diameter
+drive_axle_r = 8.5/2;
+
+drive_axle_r = 8.1/2;
+drive_axle_bearing_id = 8;
+drive_axle_bearing_od = 22.5;
+drive_axle_bearing_t = 8;
+
+bearing_holder_wall = 1.2;
+bearing_holder_tie_hole_r = 3/2;
+bearing_holder_cut = -1;
+
+bearing_pillow_rim_t = 2;
+bearing_pillow_side_t = 1.5;
+bearing_pillow_screw_thread_r = 3/2;
+bearing_pillow_screw_shank_r = 4/2;
+bearing_pillow_screw_head_r = 6/2;
+
+drive_position_x = frame_x/2+ drive_axle_bearing_od/2+bearing_pillow_rim_t;
+drive_position_y = 0;
+
+strut_t = 4;
+
+hole_diameter = 20;
 
 screw_diameter = 4;
 screw_hole_diameter =  screw_diameter * 1.3;
 
 number_of_screws = 4;
 inner_number_of_screws = 6;
+
+bearing_diameter = 0.177*25.4; // .177 caliber BB
+//bearing_diameter = 30; // marble
+
 
 
 ///// You can change these values with some thought /////

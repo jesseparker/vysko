@@ -1,6 +1,11 @@
 include <settings.scad>
+include <jplib.scad>
 include <strut.scad>
 include <roller.scad>
+include <tracer_bearing.scad>
+include <bearing.scad>
+include <nuts_washers.scad>
+include <rb-pulleys.scad>
 
 side_pulley_setback = 37;
 pulley_c_pulldown = 4;
@@ -29,25 +34,27 @@ module strut_center_pulley(roller_r = center_pulley_r, roller_t=center_pulley_t,
     
     difference() {
         union() {
-            %strut_diagonal(ring_translate = [roller_r/2,roller_r/2,0]);
+            strut_diagonal(ring_translate = [roller_r/2,roller_r/2,0]);
            // cylinder(r=roller_r*2+roller_t
             translate([0,0,center_pulley_r])
                 roller_post(h=1);
             
-            translate([side_pulley_setback,side_pulley_setback,center_pulley_r])
-                roller_post(h=1);
+          //  translate([side_pulley_setback,side_pulley_setback,center_pulley_r])
+           //     roller_post(h=1);
         }
 
         union() {
             center_pulley_roller_translate_a()
             roller(tol=1, neg=true);
             //roller_post(tol=0);
-            center_pulley_roller_translate_b()
-            roller(tol=1, neg=true);
+           // center_pulley_roller_translate_b()
+          //  roller(tol=1, neg=true);
 
         }
         //bore
         cylinder(r=5.5,h=40, center=true);
+        drum_axle(neg=true);
+
     }
     //translate([0,0,center_pulley_r])
     //    roller();
@@ -78,18 +85,62 @@ module roller_post(r=center_pulley_r, t=center_pulley_t, h=0, angle=center_pulle
    //roller(tol=1);
    }
 }
-module drum() {
-    translate([-25,-25,-50])
-    union() {
-    cylinder(r=20,h=80,center=true);
-    cylinder(r=3,h=120,center=true);
-        translate([0,0,40])
-        belt_pulley(d=40);
+drum_x=-25;
+drum_y=drum_x;
+drum_r=20;
+drum_h=60;
+drum_axle_r=1.25;
+drum_axle_h=110;
+drum_spacer_h=12;
+
+module drum_translate() {
+    translate([drum_x,drum_y,-drum_h/2-winder_floor_z-strut_t/2-drum_spacer_h])
+        children();
+}
+module drum_axle(tol=0, neg=false) {
+    drum_translate()
+    cylinder(r=drum_axle_r+tol/2,h=drum_axle_h,center=true);
+    if(neg) {
+        drum_translate()
+        translate([0,-20,0])
+        cube([drum_axle_r*2+tol,40,drum_axle_h], center=true);
     }
 }
 
+module drum(neg=false) {
+
+    difference() {
+       drum_translate()
+       union() {
+            cylinder(r=drum_r,h=drum_h,center=true);
+            translate([0,0,drum_h/2-2.5])
+                belt_pulley(d=drum_r*2);
+        }
+        drum_axle(tol=.5);
+        // for tying onto
+        drum_translate()
+        translate([0,drum_r/2,-2.5])
+        rotate(45,x_axis)
+        cube([drum_r*2+1,6,6], center=true);
+    }
+    
+}
+
 module strut_drum() {
-    strut_solid();
+    difference() {
+        union() {
+            rotate(180,[1,0,0])
+            strut_solid();
+            translate([drum_x,drum_y,-drum_spacer_h/2-strut_t/2+smidge])
+            cylinder(r=4, h=drum_spacer_h, center=true);
+        }
+        translate([0,0,-drum_axle_h/2])
+        drum_axle(neg=true, tol=.6);
+        
+        translate([0,0,winder_floor_z])
+        reducer_translate()
+        reducer_bolt(tol=1);
+    }
 }
 
 module strut_roller_c() {
@@ -103,38 +154,87 @@ module strut_roller_c() {
     roller_post();
         }
         center_pulley_roller_translate_c()
-        roller(tol=1, neg=true); 
+        roller(tol=1, neg=true);
     }
 }
+
+module reducer_bolt(tol=0) {
+    
+    translate([0,0,-.1]) {
+        bolt_1_4_x_1_5(tol=tol);
+
+        rotate(180,x_axis)
+            nut_1_4();
+    }
+}
+
+
+module reducer_translate() {
+    translate([reducer_x,reducer_y,-winder_floor_z-strut_t/2-6.5])
+    children();
+}
+
+module reducer() {
+    double_pulley(d1=50, d2=20, shaft_d=7);
+}
+
+winder_floor_z = -95;
+winder_ceiling_z =  0;
+reducer_d1 =  50;
+reducer_d2 = 20;
+reducer_x = -10;
+reducer_y = 30;
 
 
 module winder_assembly() {
     frame_rods();
     
-    strut_center_pulley();
-    center_pulley_roller_translate_a()
-        roller();
-    center_pulley_roller_translate_b()
-        roller();
+    translate([0,0,winder_ceiling_z]) {
+        strut_center_pulley();
+        center_pulley_roller_translate_a()
+            roller();
+       // center_pulley_roller_translate_b()
+       //     roller();
+    }
     
-    translate([0,0,100])
-    strut_drum();
- 
-    translate([-10,30,100-5])
+    translate([0,0,-winder_floor_z])
+        strut_drum();
+    // reducer
+    reducer_translate()
     rotate(180,[1,0,0])
-    double_pulley(d1=50, d2=20);
+    {
+        reducer();
     
-    translate([0,0,100])
-    drum();
-    
-        translate([drive_position_x,drive_position_y,95])
-    roller();
+        reducer_bolt();
+    }
 
-    translate([0,0,50]) {
-    strut_roller_c();
-    center_pulley_roller_translate_c()
-    roller();
+    drum();
+    drum_axle();
+   
+        translate([drive_position_x,drive_position_y,-winder_floor_z-12])
+    belt_pulley();
+
+    translate([0,0,-winder_floor_z/2-10]) {
+        strut_roller_c();
+        center_pulley_roller_translate_c()
+        roller();
     }
 }
 
-winder_assembly();
+//winder_assembly();
+
+module to_print() {
+    //rotate(180,x_axis)
+    //    strut_drum();
+    
+    //strut_roller_c();
+    
+    //strut_center_pulley();
+
+    //rotate(180,x_axis)
+    //drum();
+    
+    //reducer();
+}
+to_print();
+

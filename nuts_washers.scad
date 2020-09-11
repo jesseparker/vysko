@@ -66,6 +66,34 @@ module nut(h=10, od = 14, id = 6) {
         cylinder(r=id/2, h=h+1, center=true);
     }    
 }
+
+module bolt_1_4_x_2 (tol=0) {
+    bolt(d=6.25+tol, head_d=12.5, head_h=4.1, shank_l=27.5, thread_l=22.6);   
+}
+
+module bolt_1_4_x_1_5 (tol=0) {
+    bolt(d=6.25+tol, head_d=12.5, head_h=4.1, shank_l=15.5, thread_l=22.6);   
+}
+module bolt(d=6.25, head_d=12.5, head_h=4.1, shank_l=27.5, thread_l=22.6) {
+
+    oa_l = thread_l + shank_l + head_h;
+
+
+    //rotate(180,[1,0,0])
+    translate([0,0,oa_l/2-thread_l])
+    union() {
+
+    cylinder(r=d/2, h=oa_l, center=true);
+    translate([0,0,oa_l/2-head_h/2])
+        cylinder(r=head_d/2, h=head_h, center=true, $fn=6);
+    color("white")
+    translate([0,0,oa_l/2-head_h-shank_l/2])
+        cylinder(r=d/2, h=shank_l, center=true);
+    }   
+}
+//rotate(180, [1,0,0])
+//bolt_1_4_x_1_5();
+
 //nut();
 //nut_5_16();
 

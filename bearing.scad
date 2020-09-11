@@ -1,18 +1,6 @@
+include <settings.scad>
 $fn=30;
-drive_axle_r = 8.1/2;
-drive_axle_bearing_id = 8;
-drive_axle_bearing_od = 22.5;
-drive_axle_bearing_t = 8;
 
-bearing_holder_wall = 1.2;
-bearing_holder_tie_hole_r = 3/2;
-bearing_holder_cut = -1;
-
-bearing_pillow_rim_t = 2;
-bearing_pillow_side_t = 1.5;
-bearing_pillow_screw_thread_r = 3/2;
-bearing_pillow_screw_shank_r = 4/2;
-bearing_pillow_screw_head_r = 6/2;
 
 module bearing(id = drive_axle_bearing_id, od = drive_axle_bearing_od, t = drive_axle_bearing_t) {
     difference() {
