@@ -29,7 +29,7 @@ module spinning_plate(
                 translate ([0,spool_radius,3]) {
                     //spindles
                     cylinder(r=spool_hole/2*.8,h=spool_h*.6);
-                    //%spool();
+                    %spool();
                 }
             }
 
@@ -55,6 +55,9 @@ module spinning_plate(
     }
 
 }
+
+
+
 //use <tracer_plate.scad>
 //translate([0,0,100])
 //rotate(180,[1,0,0]) tracer_plate();

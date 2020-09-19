@@ -170,7 +170,7 @@ module strut_solid(x=frame_x, y=frame_y, z=strut_t, r = frame_rod_r, ring_r=20, 
 }
 //strut_solid();
 
-module strut_mono(x=frame_x, y=frame_y, z=5, r = frame_rod_r*1.5, meat_factor=1.2, ring_r = 5, ring_translate = [42,42,0],do_bearing = 1) {
+module strut_mono(x=frame_x, y=frame_y, z=5, r = frame_rod_r*1.5, meat_factor=1.2, ring_r = 7.3, ring_translate = [42,42,0],do_bearing = 1) {
     difference() {
         union() {
         hull() {             
@@ -192,4 +192,77 @@ module strut_mono(x=frame_x, y=frame_y, z=5, r = frame_rod_r*1.5, meat_factor=1.
 }    
 }
 
+module strut_side(x=frame_x, y=frame_y, z=strut_t, r = frame_rod_r, ring_r=10, meat_factor=1, square_factor = 0.7, ring_translate = [0,0,0],do_bearing = 1) {
+    difference() {
+        union() {
+            difference() {
+                hull() {             
+                    translate([x/2,y/2])
+                        cylinder(r=r+r*meat_factor, h=z, center=true);
+                    translate([x/2,-y/2])
+                        cylinder(r=r+r*meat_factor, h=z, center=true);
+                    translate([x/2,0])
+                        cylinder(r=ring_r+r*meat_factor, h=z, center=true);
+                }
 
+                translate([drive_position_x,0,0])
+                cylinder(r=drive_axle_bearing_od/2+bearing_pillow_rim_t-smidge, h=z+1, center=true);
+
+            }
+
+        // Outboard bearing holder
+        translate([drive_position_x,drive_position_y,-z/2])
+            translate([0,0,drive_axle_bearing_t/2+bearing_pillow_side_t])
+                rotate(-90,[0,0,1])
+                    bearing_pillow_bottom();
+        translate([frame_x/2+.1,0,-z/2])
+        //cube([10,10,10],center=true);
+                rotate(180,[0,0,1])
+                rotate(90,[1,0,0])
+        linear_extrude(height=frame_rod_r/2, center=true)
+        polygon([ [0,0], [0,drive_axle_bearing_t+bearing_pillow_side_t*2], [10,0]]);
+            }
+        frame_rods();
+        rod_slots_side(spin=90);
+            }
+    
+
+        
+
+        
+}    
+
+//strut_side();
+
+
+module strut_spinner(x=frame_x, y=frame_y, z=strut_t, r = frame_rod_r, spreader_ring_r = 20, ring_r=45, meat_factor=1, ring_translate = [0,0,0]) {
+    difference() {
+        union() {
+        hull() {             
+            translate([x/2,y/2])
+                cylinder(r=r+r*meat_factor, h=z, center=true);
+            translate([-x/2,-y/2])
+                cylinder(r=r+r*meat_factor, h=z, center=true);
+            translate(ring_translate)
+                cylinder(r=spreader_ring_r+r*meat_factor, h=z, center=true);
+        }
+        hull() {             
+            translate([-x/2,y/2])
+                cylinder(r=r+r*meat_factor, h=z, center=true);
+            translate([x/2,-y/2])
+                cylinder(r=r+r*meat_factor, h=z, center=true);
+            translate(ring_translate)
+                cylinder(r=spreader_ring_r+r*meat_factor, h=z, center=true);
+        }
+        cylinder(r=ring_r+r*meat_factor, h=z, center=true);
+
+}   
+    
+
+        frame_rods();
+        rod_slots();
+    
+ 
+}
+}
+//strut_spinner();

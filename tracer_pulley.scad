@@ -1,10 +1,12 @@
+include <jplib.scad>
 include <tracer_bearing.scad>
 include <bearing.scad>
 include <nuts_washers.scad>
 include <rb-pulleys.scad>
 include <rods.scad>
 
-$fn = 30;
+//$fn = 30;
+
 module tracer_single_pulley(d=20) {
     difference() {
         union() {
@@ -115,3 +117,6 @@ drive_translate()
         //tracer_double_pulley();
         rotate(180,[1,0,0])
         tracer_single_pulley(d=50);
+        
+        
+//!rotate(180,[1,0,0]) tracer_single_pulley(d=20);

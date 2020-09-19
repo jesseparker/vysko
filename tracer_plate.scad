@@ -31,9 +31,9 @@ for (i = [1:spinners] ) {
     translate([shell_r-lead_inset-4,-0,0])
         difference() {
             translate([lead_inset/2,0,t/2])
-            cube([lead_inset,5,t], center=true);
+            cube([lead_inset,8,t], center=true);
             translate([3,0,0])
-            cylinder(r=1.8, h=20, center=true);
+            cylinder(r=2, h=20, center=true);
         }
     }
 }

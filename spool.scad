@@ -1,5 +1,5 @@
 include <settings.scad>;
-flange_ratio=.7;
+flange_ratio=.9;
 module spool(
     spool_d = spool_d,
     spool_h = spool_h,
@@ -43,5 +43,5 @@ module spool_shaft(
     cylinder(r=spool_hole/2-tol/2, h=spool_h, center=true);
 }
 
-//spool();
+spool();
 //spool_shaft();

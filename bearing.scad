@@ -1,5 +1,5 @@
 include <settings.scad>
-$fn=30;
+//$fn=30;
 
 
 module bearing(id = drive_axle_bearing_id, od = drive_axle_bearing_od, t = drive_axle_bearing_t) {

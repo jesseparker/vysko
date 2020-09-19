@@ -5,7 +5,7 @@ include <roller.scad>
 include <tracer_bearing.scad>
 include <bearing.scad>
 include <nuts_washers.scad>
-include <rb-pulleys.scad>
+include <v_pulleys.scad>
 
 side_pulley_setback = 37;
 pulley_c_pulldown = 4;
@@ -34,10 +34,12 @@ module strut_center_pulley(roller_r = center_pulley_r, roller_t=center_pulley_t,
     
     difference() {
         union() {
-            strut_diagonal(ring_translate = [roller_r/2,roller_r/2,0]);
+            strut_diagonal(aring_translate = [roller_r/2,roller_r/2,0], meat_factor = 1.5, ring_r=10);
            // cylinder(r=roller_r*2+roller_t
             translate([0,0,center_pulley_r])
-                roller_post(h=1);
+                roller_post(h=5);
+            translate([drum_x,drum_y,drum_spacer_h/2+strut_t/2-smidge])
+            cylinder(r=4, h=drum_spacer_h, center=true);
             
           //  translate([side_pulley_setback,side_pulley_setback,center_pulley_r])
            //     roller_post(h=1);
@@ -45,7 +47,7 @@ module strut_center_pulley(roller_r = center_pulley_r, roller_t=center_pulley_t,
 
         union() {
             center_pulley_roller_translate_a()
-            roller(tol=1, neg=true);
+            roller(tol=1.5, neg=true);
             //roller_post(tol=0);
            // center_pulley_roller_translate_b()
           //  roller(tol=1, neg=true);
@@ -53,7 +55,7 @@ module strut_center_pulley(roller_r = center_pulley_r, roller_t=center_pulley_t,
         }
         //bore
         cylinder(r=5.5,h=40, center=true);
-        drum_axle(neg=true);
+        drum_axle(neg=true, tol=.6);
 
     }
     //translate([0,0,center_pulley_r])
@@ -76,9 +78,9 @@ module roller_post(r=center_pulley_r, t=center_pulley_t, h=0, angle=center_pulle
         hull() {
             translate([0,0,0])
                 union() {
-                    cylinder(r=center_pulley_axle_r*2.5, h=t*5,center=true);
-                    translate([0,-center_pulley_axle_r*2.5-h+.5,0])
-                        cube([center_pulley_axle_r*5,1,t*5], center=true);
+                    cylinder(r=center_pulley_axle_r*3, h=t*5,center=true);
+                    translate([0,-center_pulley_axle_r*3-h+.5,0])
+                        cube([center_pulley_axle_r*6,1,t*5], center=true);
                 }
         }
    }
@@ -192,7 +194,7 @@ module winder_assembly() {
     translate([0,0,winder_ceiling_z]) {
         strut_center_pulley();
         center_pulley_roller_translate_a()
-            roller();
+            roller(tol=1);
        // center_pulley_roller_translate_b()
        //     roller();
     }
@@ -234,7 +236,13 @@ module to_print() {
     //rotate(180,x_axis)
     //drum();
     
-    //reducer();
+    reducer();
+    
+    //strut_center_pulley();
+
+  //  rotate(180,x_axis)
+  //      drum();
+    //roller();
 }
 to_print();
 

@@ -1,6 +1,6 @@
 //
 //$fn = 100;
-$fn = 30;
+//$fn = 30;
 smidge=.01;
 ///// You can change these values easily /////
 
@@ -33,6 +33,7 @@ drive_position_y = 0;
 
 strut_t = 4;
 
+/*
 hole_diameter = 20;
 
 screw_diameter = 4;
@@ -84,6 +85,7 @@ raceway_inset = screw_inset;
     + screw_inset*2
     + screw_hole_diameter*2
    ;
+*/
 
 //spool
 spool_d = 15; // main cylinder diameter
@@ -94,7 +96,7 @@ spool_shaft_tol=2;
 
 // rollers for winder 
 center_pulley_r = 10;
-center_pulley_t = 4;
+center_pulley_t = 5;
 center_pulley_angle = 45;
-center_pulley_axle_r = 3;
-center_pulley_axle_l = 22;
+center_pulley_axle_r = 1.5;
+center_pulley_axle_l = 30;
