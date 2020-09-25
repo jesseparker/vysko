@@ -1,6 +1,8 @@
 include <spool.scad>
 include <jplib.scad>
 
+$fa = 1; $fs=.5;
+
 spool_h = 30;
 spool_z = 1; // space spool-retainer
 spool_d = 19.5;
@@ -26,7 +28,7 @@ roller_hole_d=8;
 //roller_wall = roller_d/2-roller_hole_d/2;
 
 roller_shaft_d=6;
-roller_shaft_hole_d=roller_shaft_d+1;
+roller_shaft_hole_d=roller_shaft_d+1.5;
 
 roller_offset = (roller_hole_d - roller_shaft_hole_d)/2;
 
@@ -97,7 +99,11 @@ module sides(tol=0) {
 module roller() {
     //rotate(90, [1,0,0])
     difference() {
-        cylinder(h=roller_width, r=roller_d/2, center=true);
+        union() {
+            cylinder(h=roller_width, r=roller_d/2, center=true);
+            translate([0,0,-roller_width/2+roller_width/16])
+            cylinder(h=roller_width/8, r1=roller_d/2*1.4, r2=roller_d/2, center=true);
+        }
         cylinder(h=roller_width+1, r=roller_shaft_hole_d/2, center=true);
 
     }    
@@ -194,7 +200,7 @@ module spool_holder() {
     //spool();
 }
 
-module die(tol=.5) {
+module die(tol=.5, d=die_d) {
     die_translate()
     difference() {
         union() {
@@ -203,7 +209,7 @@ module die(tol=.5) {
             cube([2,12,12], center=true);
         }
         rotate(90,[0,1,0])
-        cylinder(r=die_d/2,h=die_holder_t*3,center=true);
+        cylinder(r=d/2,h=die_holder_t*3,center=true);
     }
 }
 module die_holder(tol=0) {
@@ -291,20 +297,23 @@ module to_print() {
 //translate([0,-roller_height/2-spool_h-spool_z+roller_d/2-under_z-retainer_height,0])
 //retainer();
 
-rotate(-90,y_axis)
-translate([-roller_length/2-die_holder_t/2-die_holder_margin+die_holder_t/2,-roller_height/2+roller_offset-die_d/2,0])
-die_holder();
 
-translate([00,-20,2])
-rotate(-90,y_axis)
-translate([-roller_length/2-die_holder_t/2-die_holder_margin+die_holder_t/2,-roller_height/2+roller_offset-die_d/2,0])
-die();
+//rotate(-90,y_axis)
+//translate([-roller_length/2-die_holder_t/2-die_holder_margin+die_holder_t/2,-roller_height/2+roller_offset-die_d/2,0])
+//die_holder();
+
+//translate([00,-20,2])
+//rotate(-90,y_axis)
+//translate([-roller_length/2-die_holder_t/2-die_holder_margin+die_holder_t/2,-roller_height/2+roller_offset-die_d/2,0])
+//die(d=3);
+
+
 //for(i=[0:2]) { translate([i*spool_d*1.6,0,0]) spool(); }
 //spool();
 
-//for(i=[0:3]) { translate([i*roller_d*1.4,0,0]) translate([0,0,roller_width/2])
-    //roller();
-//    }
+for(i=[0:3]) { translate([i*roller_d*1.5,0,0]) translate([0,0,roller_width/2])
+    !roller();
+    }
 }
 
 to_print();

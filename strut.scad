@@ -201,7 +201,7 @@ module strut_side(x=frame_x, y=frame_y, z=strut_t, r = frame_rod_r, ring_r=10, m
                         cylinder(r=r+r*meat_factor, h=z, center=true);
                     translate([x/2,-y/2])
                         cylinder(r=r+r*meat_factor, h=z, center=true);
-                    translate([x/2,0])
+                    translate([drive_position_x-drive_axle_bearing_od/2,0])
                         cylinder(r=ring_r+r*meat_factor, h=z, center=true);
                 }
 
@@ -215,11 +215,11 @@ module strut_side(x=frame_x, y=frame_y, z=strut_t, r = frame_rod_r, ring_r=10, m
             translate([0,0,drive_axle_bearing_t/2+bearing_pillow_side_t])
                 rotate(-90,[0,0,1])
                     bearing_pillow_bottom();
-        translate([frame_x/2+.1,0,-z/2])
+        translate([drive_position_x-drive_axle_bearing_od/2-bearing_pillow_side_t,0,-z/2])
         //cube([10,10,10],center=true);
                 rotate(180,[0,0,1])
                 rotate(90,[1,0,0])
-        linear_extrude(height=frame_rod_r/2, center=true)
+        linear_extrude(height=frame_rod_r, center=true)
         polygon([ [0,0], [0,drive_axle_bearing_t+bearing_pillow_side_t*2], [10,0]]);
             }
         frame_rods();
@@ -232,7 +232,7 @@ module strut_side(x=frame_x, y=frame_y, z=strut_t, r = frame_rod_r, ring_r=10, m
         
 }    
 
-//strut_side();
+strut_side();
 
 
 module strut_spinner(x=frame_x, y=frame_y, z=strut_t, r = frame_rod_r, spreader_ring_r = 20, ring_r=45, meat_factor=1, ring_translate = [0,0,0]) {

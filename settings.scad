@@ -28,7 +28,7 @@ bearing_pillow_screw_thread_r = 3/2;
 bearing_pillow_screw_shank_r = 4/2;
 bearing_pillow_screw_head_r = 6/2;
 
-drive_position_x = frame_x/2+ drive_axle_bearing_od/2+bearing_pillow_rim_t;
+drive_position_x = frame_x/2+ 25;
 drive_position_y = 0;
 
 strut_t = 4;

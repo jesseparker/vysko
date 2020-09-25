@@ -43,5 +43,5 @@ module spool_shaft(
     cylinder(r=spool_hole/2-tol/2, h=spool_h, center=true);
 }
 
-spool();
+//spool();
 //spool_shaft();
