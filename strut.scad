@@ -232,7 +232,7 @@ module strut_side(x=frame_x, y=frame_y, z=strut_t, r = frame_rod_r, ring_r=10, m
         
 }    
 
-strut_side();
+//strut_side();
 
 
 module strut_spinner(x=frame_x, y=frame_y, z=strut_t, r = frame_rod_r, spreader_ring_r = 20, ring_r=45, meat_factor=1, ring_translate = [0,0,0]) {

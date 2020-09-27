@@ -1,6 +1,6 @@
 include <settings.scad>
 include <hollow_bearing.scad>
-use <rb-pulleys.scad>
+use <v_pulleys.scad>
 
 $fa=1; $fs=.5;
 
@@ -10,18 +10,18 @@ inner_shell_wall = shell_wall;
 outer_shell_wall = shell_wall/2;
 shell_t = 2; 
 flange_w = shell_t*2;
-inner_outer_tolerance = .8;
+inner_outer_tolerance = 1;
 journal_t = strut_t;
-journal_tolerance = 1.2;
-journal_tolerance_z = .6;
+journal_tolerance = 1;
+journal_tolerance_z = lh;
 
-retainer_t = 1;
+retainer_t = layer_multiple(1);
 retainer_d = inner_shell_wall /2;
 retainer_w = retainer_d*2+inner_outer_tolerance;
-retainer_tolerance=.4;
+retainer_tolerance=.1;
 
 spinner_pulley_t = 5;
-spinner_single_pulley_t = 7;
+spinner_single_pulley_t = 6;
 spinner_pulley_attach = .1;
 
 spinner_pulley_center_z = shell_t+journal_t/2+journal_tolerance_z/2+spinner_pulley_t/2-spinner_pulley_attach;
@@ -104,8 +104,8 @@ module spinner_inner_shell() {
         d = shell_r*2-4,
         shaft_d=inner_hole_r*2,
         belt_width=2,
-        slope=.5,
-        t= spinner_pulley_t
+        t= spinner_pulley_t,
+        wedge_factor=.4
     );
     spinner_connect_tabs();
 }
@@ -125,23 +125,24 @@ module spinner_retainer_ring() {
     retainer_ring();
 }
 
-module spinner_center_hole() {
-    center_hole();
-}
+//module spinner_center_hole() {
+//    center_hole();
+//}
 
 module spinner_bearing_assembly() {
 //intersection() {
-//translate([0,0,shell_t+journal_t/2+journal_tolerance_z/2])
-//spinner_outer_shell();
+translate([0,0,shell_t+journal_t/2+journal_tolerance_z/2])
+spinner_outer_shell();
 
     translate([0,0,-shell_t-journal_t/2-journal_tolerance_z/2]) {
     spinner_inner_shell();
 
-//   translate_retainer()
-//  spinner_retainer_ring();
+   translate_retainer()
+  spinner_retainer_ring();
 }
-       translate([0,0,-shell_t-journal_t/2-journal_tolerance_z/2-spinner_pulley_t+spinner_pulley_attach-1])
-spinner_key(tol=2);
+
+//translate([0,0,-shell_t-journal_t/2-journal_tolerance_z/2-spinner_pulley_t+spinner_pulley_attach-1])
+//spinner_key(tol=2);
     
 
 spinner_journal();

@@ -9,7 +9,8 @@ module spinning_plate(
     center_hole = 3,
     h=spool_h*.7,
     //ccw=1
-    ccw=-1
+    ccw=-1,
+    show_spools = false
 ) {
     angle=360/num_spools;
     spool_radius = diameter/2-spool_d;
@@ -29,7 +30,8 @@ module spinning_plate(
                 translate ([0,spool_radius,3]) {
                     //spindles
                     cylinder(r=spool_hole/2*.8,h=spool_h*.6);
-                    %spool();
+                    if (show_spools)
+                        %spool();
                 }
             }
 
@@ -69,7 +71,10 @@ module spinning_plate(
 //spinning_plate();
 
 //translate([0,0,-40])
-spinning_plate(num_spools=7, diameter=110, center_hole = 4,ccw=1);
+// "SP-1"
+//spinning_plate(num_spools=7, diameter=110, center_hole = 4,ccw=1);
+// "SP-2"
+spinning_plate(num_spools=8, diameter=110, center_hole = 5,ccw=-1,ashow_spools=true);
 
 //translate([0,0,-10])
 //rotate(180,[1,0,0])

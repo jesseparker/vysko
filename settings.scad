@@ -3,6 +3,12 @@
 //$fn = 30;
 smidge=.01;
 ///// You can change these values easily /////
+lhf = .35;
+lh = .3;
+
+function layer_multiple(z) = (z <= lhf) ? lhf : lhf+lh*(ceil((z-lhf)/lh));
+//foo = layer_multiple(100);
+//echo(foo);
 
 frame_x =120;
 frame_y = frame_x;
@@ -31,7 +37,7 @@ bearing_pillow_screw_head_r = 6/2;
 drive_position_x = frame_x/2+ 25;
 drive_position_y = 0;
 
-strut_t = 4;
+strut_t = layer_multiple(4);
 
 /*
 hole_diameter = 20;
@@ -88,8 +94,9 @@ raceway_inset = screw_inset;
 */
 
 //spool
-spool_d = 15; // main cylinder diameter
-spool_h = 35; // main cylinder height
+spool_d = 15;
+spool_h = 35;
+spool_flange_ratio=.8;
 spool_hole = spool_d - 4; // hole diameter
 spool_slope=1/6; // angle of conical section
 spool_shaft_tol=2;

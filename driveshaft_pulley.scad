@@ -9,14 +9,13 @@ module driveshaft_pulley(d=20) {
                 d = d,
                 shaft_d=drive_axle_r*2,
                 belt_width=3,
-                slope=.5,
                 t = 6,
-                wedge_factor=.1
+                wedge_factor=.5
             );
         }
-        //translate([0,0,0])
+        translate([0,0,1.3])
             nut_5_16();
     }
 }
 
-driveshaft_pulley(d=20);
+driveshaft_pulley(d=18);
