@@ -1,5 +1,7 @@
 # vysko
 
+![Version 1](https://github.com/jesseparker/vysko/blob/master/IMG_20200929_203048_599.jpg?raw=true)
+
 Parts for a fuse weaving machine, and other fuse-related tools
 
 Canon fuse is a fairly reliable and durable fuse for fireworks.  It contains a central core of a composition like black powder wrapped and contained by spirals of cotton thread
