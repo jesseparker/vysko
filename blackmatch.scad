@@ -52,7 +52,7 @@ retainer_length = body_length;
 
 retainer_z = 2;
 
-
+flange_ratio = 0.7;
 
 module corner_translate() {
     for (i = [1,-1]) {
@@ -101,8 +101,9 @@ module roller() {
     difference() {
         union() {
             cylinder(h=roller_width, r=roller_d/2, center=true);
-            translate([0,0,-roller_width/2+roller_width/16])
-            cylinder(h=roller_width/8, r1=roller_d/2*1.4, r2=roller_d/2, center=true);
+            // thicker bottom, for betta stick
+            //translate([0,0,-roller_width/2+roller_width/16])
+            //cylinder(h=roller_width/8, r1=roller_d/2*1.4, r2=roller_d/2, center=true);
         }
         cylinder(h=roller_width+1, r=roller_shaft_hole_d/2, center=true);
 
@@ -253,16 +254,16 @@ module retainer_blank(tol=0) {
 module retainer(tol=0) {
     difference() {
         retainer_blank(tol=tol);
-        translate([0,retainer_engagement,0])
+        translate([0,retainer_engagement/2,0])
             sides(tol=1);
     }
 }
 
 module spools() {
-    spool_translate() spool();
+    spool_translate() spool(flange_ratio=flange_ratio);
 }
 
-module main() {
+module assembly() {
     //color(c = [ 0.7, 0.5, 0.4, .5])
     rollers();
     spools();
@@ -278,7 +279,7 @@ module main() {
 
 //secondary_as_cube = false;
 //giftwrap(tail=[0,1,0])
-//main();
+assembly();
 
 
 module to_print() {
@@ -311,9 +312,9 @@ module to_print() {
 //for(i=[0:2]) { translate([i*spool_d*1.6,0,0]) spool(); }
 //spool();
 
-for(i=[0:3]) { translate([i*roller_d*1.5,0,0]) translate([0,0,roller_width/2])
-    !roller();
-    }
+//for(i=[0:3]) { translate([i*roller_d*1.5,0,0]) translate([0,0,roller_width/2])
+//    !roller();
+//    }
 }
 
-to_print();
+//to_print();
