@@ -1,6 +1,6 @@
 # vysko
 
-![Version 1](https://github.com/jesseparker/vysko/blob/master/img/vysko.jpg?raw=true)
+![Vysko Version 1](https://github.com/jesseparker/vysko/blob/master/img/vysko.jpg?raw=true)
 
 Open Source Fuse Machines
 
@@ -32,7 +32,10 @@ In addition to several copies of several printed parts you will need:
 Not much documentation available at this time!  Good luck!
 
 
+
 Blackmatch Machine
+
+![Blackmatch Version 1](https://github.com/jesseparker/vysko/blob/master/img/bm.jpg?raw=true)
 
 This machine is for making blackmatch which is a basic fuse used in pyrotechnics.  Blackmatch can be used as a fuse, and is also used to make quickmatch.
 
