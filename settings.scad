@@ -2,22 +2,26 @@
 //$fn = 100;
 //$fn = 30;
 smidge=.01;
-///// You can change these values easily /////
-lhf = .35;
-lh = .3;
 
+lhf = .35;  // Layer Height FFFFirst
+lh = .3; // Layer Height
+
+// in this model there are "z axis" tolerances that are 
+// in the range of a 3d printer layer height.  Some dimensions 
+// need to be modelled as actual printed heights.  Adjust lhf and lh
+// (above) for your slicer settings.
+// layer_multiple() returns the closest layer height >= a distance
 function layer_multiple(z) = (z <= lhf) ? lhf : lhf+lh*(ceil((z-lhf)/lh));
 //foo = layer_multiple(100);
 //echo(foo);
 
-frame_x =120;
+frame_x = 120;
 frame_y = frame_x;
 frame_rod_diameter=8;
 
 frame_rod_r = 6.5/2;
 frame_length = 500;
 
-drive_axle_r = 8.5/2;
 
 drive_axle_r = 8.1/2;
 drive_axle_bearing_id = 8;
@@ -38,60 +42,6 @@ drive_position_x = frame_x/2+ 25;
 drive_position_y = 0;
 
 strut_t = layer_multiple(4);
-
-/*
-hole_diameter = 20;
-
-screw_diameter = 4;
-screw_hole_diameter =  screw_diameter * 1.3;
-
-number_of_screws = 4;
-inner_number_of_screws = 6;
-
-bearing_diameter = 0.177*25.4; // .177 caliber BB
-//bearing_diameter = 30; // marble
-
-
-
-///// You can change these values with some thought /////
-
-raceway_thickness = bearing_diameter * .8 ;
-
-screw_inset = screw_hole_diameter /2;
-//screw_inset=0;
-raceway_inset = screw_inset;
-//raceway_inset=0;
-
-
-
-    bearing_race_diameter = 
-    hole_diameter
-    + screw_inset*4
-    + screw_hole_diameter*2
-    + raceway_inset*2
-    + bearing_diameter
-    ;
-
-    raceway_diameter =
-    bearing_race_diameter
-    + bearing_diameter
-    + raceway_inset*2
-    ;
-
-    inner_raceway_hole_diameter = 
-    hole_diameter
-    + screw_inset*4
-    + screw_hole_diameter*2
-    ;
-    
-    inner_raceway_diameter =
-    bearing_race_diameter
-    + bearing_diameter
-    + raceway_inset*2
-    + screw_inset*2
-    + screw_hole_diameter*2
-   ;
-*/
 
 //spool
 spool_d = 15;

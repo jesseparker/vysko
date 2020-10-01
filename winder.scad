@@ -7,6 +7,22 @@ include <bearing.scad>
 include <nuts_washers.scad>
 include <v_pulleys.scad>
 
+drum_x=-25;
+drum_y=drum_x;
+drum_r=20;
+drum_h=60;
+drum_axle_r=1.25;
+drum_axle_h=110;
+drum_spacer_h=12;
+
+winder_floor_z = -95;
+winder_ceiling_z =  0;
+reducer_d1 = 60;
+reducer_d2 = 20;
+reducer_x = -5;
+reducer_y = 35;
+
+
 side_pulley_setback = 37;
 pulley_c_pulldown = 4;
 
@@ -87,13 +103,6 @@ module roller_post(r=center_pulley_r, t=center_pulley_t, h=0, angle=center_pulle
    //roller(tol=1);
    }
 }
-drum_x=-25;
-drum_y=drum_x;
-drum_r=20;
-drum_h=60;
-drum_axle_r=1.25;
-drum_axle_h=110;
-drum_spacer_h=12;
 
 module drum_translate() {
     translate([drum_x,drum_y,-drum_h/2-winder_floor_z-strut_t/2-drum_spacer_h])
@@ -116,7 +125,7 @@ module drum(neg=false) {
        union() {
             cylinder(r=drum_r,h=drum_h,center=true);
             translate([0,0,drum_h/2-2.5])
-                belt_pulley(d=drum_r*2);
+                belt_pulley(d=drum_r*2+6);
         }
         drum_axle(tol=.5);
         // for tying onto
@@ -177,15 +186,10 @@ module reducer_translate() {
 }
 
 module reducer() {
-    double_pulley(d1=50, d2=20, shaft_d=7);
+    double_pulley(d1=reducer_d1, d2=reducer_d2, shaft_d=7);
 }
 
-winder_floor_z = -95;
-winder_ceiling_z =  0;
-reducer_d1 =  50;
-reducer_d2 = 20;
-reducer_x = -10;
-reducer_y = 30;
+
 
 
 module winder_assembly() {
@@ -223,26 +227,26 @@ module winder_assembly() {
     }
 }
 
-//winder_assembly();
+winder_assembly();
 
 module to_print() {
-    //rotate(180,x_axis)
-    //    strut_drum();
+    rotate(180,x_axis)
+        strut_drum();
     
-    //strut_roller_c();
+     //strut_roller_c();
     
     //strut_center_pulley();
 
     //rotate(180,x_axis)
     //drum();
     
-    reducer();
+    //reducer();
     
     //strut_center_pulley();
 
-  //  rotate(180,x_axis)
-  //      drum();
+    //rotate(180,x_axis)
+    //    drum();
     //roller();
 }
-to_print();
+//to_print();
 

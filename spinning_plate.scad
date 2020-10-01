@@ -71,10 +71,10 @@ module spinning_plate(
 //spinning_plate();
 
 //translate([0,0,-40])
-// "SP-1"
-//spinning_plate(num_spools=7, diameter=110, center_hole = 4,ccw=1);
-// "SP-2"
-spinning_plate(num_spools=8, diameter=110, center_hole = 5,ccw=-1,ashow_spools=true);
+// "spinning_plate_ccw"
+spinning_plate(num_spools=8, diameter=110, center_hole = 4,ccw=1);
+// "spinning_plate_cw"
+//spinning_plate(num_spools=8, diameter=110, center_hole = 5,ccw=-1,ashow_spools=true);
 
 //translate([0,0,-10])
 //rotate(180,[1,0,0])

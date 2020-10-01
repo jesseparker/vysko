@@ -42,7 +42,7 @@ module funnel_strut(h=70, r1 = 50, r2=0, hole_r=1.7, wall = 2.5) {
 }
 
 //intersection() {
-!translate([0,0,funnel_h-strut_t/2-1])
+translate([0,0,funnel_h-strut_t/2-1])
 funnel_strut();
 
 //!rotate(180,[1,0,0])

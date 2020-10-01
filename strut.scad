@@ -118,7 +118,7 @@ module strut_diagonal(x=frame_x, y=frame_y, z= strut_t, r = frame_rod_r, meat_fa
 //strut_center_pulley();
 //roller();
 
-module strut_solid(x=frame_x, y=frame_y, z=strut_t, r = frame_rod_r, ring_r=20, meat_factor=1, square_factor = 0.7, ring_translate = [0,0,0],do_bearing = 1) {
+module strut_solid(x=frame_x, y=frame_y, z=strut_t, r = frame_rod_r, ring_r=20, meat_factor=1, square_factor = 0.8, ring_translate = [0,0,0],do_bearing = 0) {
     difference() {
         union() {
         hull() {             

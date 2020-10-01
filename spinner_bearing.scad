@@ -141,8 +141,8 @@ spinner_outer_shell();
   spinner_retainer_ring();
 }
 
-//translate([0,0,-shell_t-journal_t/2-journal_tolerance_z/2-spinner_pulley_t+spinner_pulley_attach-1])
-//spinner_key(tol=2);
+translate([0,0,-shell_t-journal_t/2-journal_tolerance_z/2-spinner_pulley_t+spinner_pulley_attach-1])
+spinner_key(tol=1.5);
     
 
 spinner_journal();
@@ -150,7 +150,7 @@ spinner_journal();
 
 }
 //spinner_center_hole();
-//!spinner_bearing_assembly();
+//spinner_bearing_assembly();
 
 module spinner_bearing_print_all() {
 translate([0,0,0])
