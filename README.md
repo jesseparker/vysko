@@ -1,13 +1,44 @@
 # vysko
 
-![Version 1](https://github.com/jesseparker/vysko/blob/master/IMG_20200929_203048_599.jpg?raw=true)
+![Version 1](https://github.com/jesseparker/vysko/blob/master/img/vysko.jpg?raw=true)
 
-Parts for a fuse weaving machine, and other fuse-related tools
+Open Source Fuse Machines
 
-Canon fuse is a fairly reliable and durable fuse for fireworks.  It contains a central core of a composition like black powder wrapped and contained by spirals of cotton thread
+2 machines are included here:
+
+- A "visco" style fuse making machine
+- A blackmatch making machine
+
+VYSKO
+
+Most of the files here are parts for a fuse weaving machine for making fuse with a powder core, wrapped in 2 layers of helical-wound thread.
 
 If you search online you will find several handmade machines for making this kind of fuse.  They are typically 100% custom machines, and they are typically pretty big or even commercial-size.
 
-This machine is designed for hobbyist use.  It is limited in the length of completed fuse that can be produced - there's only so much room for thread.  This machine is comparatively compact, is very adjustable, and can be made without specialized components.
+This machine is designed for hobbyist use.  It is limited in the length of completed fuse that can be produced - there's only so much room for thread and finished fuse.  This machine is comparatively compact, is very adjustable, and can be made without specialized components.
 
+In addition to several copies of several printed parts you will need:
+
+- 4 1/4" threaded rod 24" long
+- 1 5/16" threaded rod 24" long
+- 2 2mm shaft 10 cm long
+- 3 608 bearings ("skateboard bearings")
+- 2 mm round polyurethane belt ~ 2 meters
+- 1 1/4" 1 1/2" bolt
+- 1 8" x 8" x 3/4" plywood baseplate
+- 1000 yards cotton sewing thread
+- Meal (pyrotechnic composition)
+
+Not much documentation available at this time!  Good luck!
+
+
+Blackmatch Machine
+
+This machine is for making blackmatch which is a basic fuse used in pyrotechnics.  Blackmatch can be used as a fuse, and is also used to make quickmatch.
+
+In addition to about 12 printed parts you will need:
+
+- 4 1/4" 3" bolts + nuts
+- Cotton crochet thread #10 size (or similar)
+- Meal + 5% dextrin (pyrotechnic composition)
 
