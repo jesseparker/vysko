@@ -18,4 +18,4 @@ module driveshaft_pulley(d=20) {
     }
 }
 
-driveshaft_pulley(d=18);
+//driveshaft_pulley(d=18);

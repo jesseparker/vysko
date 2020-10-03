@@ -4,7 +4,7 @@ use <v_pulleys.scad>
 
 $fa=1; $fs=.5;
 
-inner_hole_r = 35;
+inner_hole_r = spinner_center_hole_r;
 shell_wall = 2;
 inner_shell_wall = shell_wall;
 outer_shell_wall = shell_wall/2;

@@ -21,7 +21,7 @@ module belt_pulley(
             angle=angle
         );
     }
-        cylinder(r=d/2-belt_d/2-belt_d*wedge_factor,h=t, center=true);
+        //cylinder(r=d/2-belt_d/2-belt_d*wedge_factor,h=t, center=true);
     }
         cylinder(r=shaft_d/2,h=t+1, center=true);
 
@@ -62,7 +62,7 @@ module double_pulley(
 
 //belt_pulley();
 //reducer_pulley(d1=10,d2=20);
-//dia_1=30;
+//dia_1=80;
 
 //double_pulley(d1=dia_1,d2=dia_1/4,belt_width=25.4/8,t=7);
 

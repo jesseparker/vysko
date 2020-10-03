@@ -21,7 +21,8 @@ reducer_d1 = 60;
 reducer_d2 = 20;
 reducer_x = -5;
 reducer_y = 35;
-
+reducer2_x = 35;
+reducer2_y = -25;
 
 side_pulley_setback = 37;
 pulley_c_pulldown = 4;
@@ -185,6 +186,11 @@ module reducer_translate() {
     children();
 }
 
+module reducer2_translate() {
+    translate([reducer2_x,reducer2_y,-winder_floor_z-strut_t/2-6.5])
+    children();
+}
+
 module reducer() {
     double_pulley(d1=reducer_d1, d2=reducer_d2, shaft_d=7);
 }
@@ -195,13 +201,19 @@ module reducer() {
 module winder_assembly() {
     frame_rods();
     
-    translate([0,0,winder_ceiling_z]) {
-        strut_center_pulley();
-        center_pulley_roller_translate_a()
-            roller(tol=1);
-       // center_pulley_roller_translate_b()
-       //     roller();
-    }
+//    translate([0,0,winder_ceiling_z]) {
+//        strut_center_pulley();
+//        center_pulley_roller_translate_a()
+//            roller(tol=1);
+//       // center_pulley_roller_translate_b()
+//       //     roller();
+//    }
+ 
+ //    translate([0,0,-winder_floor_z/2-10]) {
+//        strut_roller_c();
+//        center_pulley_roller_translate_c()
+//        roller();
+//    }
     
     translate([0,0,-winder_floor_z])
         strut_drum();
@@ -213,6 +225,16 @@ module winder_assembly() {
     
         reducer_bolt();
     }
+    
+    reducer2_translate()
+    rotate(180,[1,0,0])
+    {
+        translate([0,0,10])
+        rotate(180,x_axis)
+        reducer();
+    
+        reducer_bolt();
+    }
 
     drum();
     drum_axle();
@@ -220,11 +242,7 @@ module winder_assembly() {
         translate([drive_position_x,drive_position_y,-winder_floor_z-12])
     belt_pulley();
 
-    translate([0,0,-winder_floor_z/2-10]) {
-        strut_roller_c();
-        center_pulley_roller_translate_c()
-        roller();
-    }
+
 }
 
 winder_assembly();

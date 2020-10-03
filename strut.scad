@@ -254,7 +254,7 @@ module strut_spinner(x=frame_x, y=frame_y, z=strut_t, r = frame_rod_r, spreader_
             translate(ring_translate)
                 cylinder(r=spreader_ring_r+r*meat_factor, h=z, center=true);
         }
-        cylinder(r=ring_r+r*meat_factor, h=z, center=true);
+        cylinder(r=ring_r+r*meat_factor*2, h=z, center=true);
 
 }   
     

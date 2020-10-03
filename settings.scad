@@ -57,3 +57,6 @@ center_pulley_t = 5;
 center_pulley_angle = 45;
 center_pulley_axle_r = 1.5;
 center_pulley_axle_l = 30;
+
+spinner_center_hole_r = 35;
+tracer_center_hole_r = 55;
