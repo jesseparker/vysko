@@ -2,7 +2,6 @@ include <settings.scad>
 include <jplib.scad>
 include <strut.scad>
 include <roller.scad>
-include <tracer_bearing.scad>
 include <bearing.scad>
 include <nuts_washers.scad>
 include <v_pulleys.scad>
@@ -19,10 +18,11 @@ winder_floor_z = -95;
 winder_ceiling_z =  0;
 reducer_d1 = 60;
 reducer_d2 = 20;
-reducer_x = -5;
+reducer_x = 0;
 reducer_y = 35;
 reducer2_x = 35;
 reducer2_y = -25;
+// TODO  Should the drum should move outward further?
 
 side_pulley_setback = 37;
 pulley_c_pulldown = 4;
@@ -142,7 +142,7 @@ module strut_drum() {
     difference() {
         union() {
             rotate(180,[1,0,0])
-            strut_solid();
+            strut_solid(meat_factor=2,z=strut_t+2);
             translate([drum_x,drum_y,-drum_spacer_h/2-strut_t/2+smidge])
             cylinder(r=4, h=drum_spacer_h, center=true);
         }
@@ -201,19 +201,19 @@ module reducer() {
 module winder_assembly() {
     frame_rods();
     
-//    translate([0,0,winder_ceiling_z]) {
-//        strut_center_pulley();
-//        center_pulley_roller_translate_a()
-//            roller(tol=1);
-//       // center_pulley_roller_translate_b()
-//       //     roller();
-//    }
+    translate([0,0,winder_ceiling_z]) {
+        strut_center_pulley();
+        center_pulley_roller_translate_a()
+            roller(tol=1);
+       // center_pulley_roller_translate_b()
+       //     roller();
+    }
  
- //    translate([0,0,-winder_floor_z/2-10]) {
-//        strut_roller_c();
-//        center_pulley_roller_translate_c()
-//        roller();
-//    }
+     translate([0,0,-winder_floor_z/2-10]) {
+        strut_roller_c();
+        center_pulley_roller_translate_c()
+        roller();
+    }
     
     translate([0,0,-winder_floor_z])
         strut_drum();

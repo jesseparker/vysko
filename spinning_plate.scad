@@ -6,6 +6,8 @@ use <spool.scad>
     i_tol=1;
     height = spool_h*.7;
     
+    $fa=2; $fs=1;
+    
 module spinning_plate(
     num_spools=5,
     diameter=100,
@@ -81,7 +83,7 @@ module spinner_insert(
 
     difference() {
         insert_translate()
-            tablet([20,20,10]);
+            tablet([20,20,10], r=6);
         
          for (i=[0:1:num_spools-1]){
             rotate(angle*i-half_spool_angle, [0,0,1])
@@ -93,28 +95,23 @@ module spinner_insert(
         //bore
         cylinder(r=center_hole/2,h=h*2,center=true);
         //chamfer
-        translate([0,0,h-center_hole*2+.01])
-        cylinder(r1=center_hole/2,r2=center_hole*2,h=center_hole*2);
+        translate([0,0,h-5+smidge])
+        cylinder(r1=center_hole/2,r2=center_hole*1.4,h=5);
+        //chamfer
+        translate([0,0,h-10-smidge])
+        cylinder(r2=center_hole/2,r1=center_hole*.8,h=3);
        
     }
 }
 
 spinner_insert(center_hole=2);
-//use <tracer_plate.scad>
-//translate([0,0,100])
-//rotate(180,[1,0,0]) tracer_plate();
 
-//use <funnel.scad>
-//translate([0,0,23])
-//funnel();
-
-//spinning_plate();
 
 //translate([0,0,-40])
 // "spinning_plate_ccw"
-spinning_plate(num_spools=8, diameter=110, ccw=1, show_spools=true);
+//spinning_plate(num_spools=8, diameter=110, ccw=1, show_spools=false);
 // "spinning_plate_cw"
-//spinning_plate(num_spools=8, diameter=110, center_hole = 5,ccw=-1,ashow_spools=true);
+spinning_plate(num_spools=8, diameter=110, center_hole = 3,ccw=-1,ashow_spools=true);
 
 //translate([0,0,-10])
 //rotate(180,[1,0,0])

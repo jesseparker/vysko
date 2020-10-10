@@ -2,7 +2,8 @@ include <settings.scad>
 include <hollow_bearing.scad>
 use <v_pulleys.scad>
 
-$fa=1; $fs=.5;
+//$fa=1; $fs=.5;
+$fa=3; $fs=2;
 
 inner_hole_r = tracer_center_hole_r;
 shell_wall = 2;
@@ -34,7 +35,7 @@ outer_shell_h = journal_t + shell_t +journal_tolerance_z;
 
 */
 
-tracer_key_t = 2;
+tracer_key_t = 1.5;
 tracer_key_insert = 4;
 
 module tracer_connect_holes() {
@@ -67,8 +68,8 @@ module tracer_key(t=tracer_key_t, tol=0) {
         translate([0,0,tracer_key_insert/2])
             cylinder(r=inner_hole_r-tol/2, h=tracer_key_insert, center=true);
             
-        translate([0,0,tracer_key_insert/2-smidge])
-            cylinder(r=inner_hole_r-tol/2, h=tracer_key_insert, center=true);
+      //  translate([0,0,tracer_key_insert/2-smidge])
+      //      cylinder(r=inner_hole_r-tol/2, h=tracer_key_insert, center=true);
 
 
             
@@ -77,12 +78,12 @@ cylinder(r=inner_hole_r-tol/2-t, h=20, center=true);
     }
     intersection() {
             translate([inner_hole_r,0,+(tracer_key_insert-t)/2])
-                cylinder(r=5+t,h=t+tracer_key_insert, center=true);
+                cylinder(r=5+t+tol/2,h=t+tracer_key_insert, center=true);
             cylinder(r=inner_hole_r-tol/2, h=tracer_key_insert*2, center=true);
     }
     intersection() {
             translate([-inner_hole_r,0,+(tracer_key_insert-t)/2])
-                cylinder(r=5+t,h=t+tracer_key_insert, center=true);
+                cylinder(r=5+t+tol/2,h=t+tracer_key_insert, center=true);
             cylinder(r=inner_hole_r-tol/2, h=tracer_key_insert*2, center=true);
     }
 }
@@ -130,27 +131,29 @@ module tracer_retainer_ring() {
 //}
 
 module tracer_bearing_assembly() {
+    
 //intersection() {
-translate([0,0,shell_t+journal_t/2+journal_tolerance_z/2])
-tracer_outer_shell();
+//translate([0,0,shell_t+journal_t/2+journal_tolerance_z/2])
+//tracer_outer_shell();
 
     translate([0,0,-shell_t-journal_t/2-journal_tolerance_z/2]) {
     tracer_inner_shell();
 
-   translate_retainer()
-  tracer_retainer_ring();
+ //  translate_retainer()
+ // tracer_retainer_ring();
 }
 
+//color("red")
 translate([0,0,-shell_t-journal_t/2-journal_tolerance_z/2-tracer_pulley_t+tracer_pulley_attach-1])
-tracer_key(tol=1.5);
-    
+!tracer_key(tol=3);
+   // }
 
-tracer_journal();
+//tracer_journal();
 //}
 
 }
 //tracer_center_hole();
-//tracer_bearing_assembly();
+tracer_bearing_assembly();
 
 module tracer_bearing_print_all() {
 translate([0,0,0])
@@ -161,10 +164,12 @@ translate([shell_r*2+4,0,tracer_pulley_t-tracer_pulley_attach])
     
 //translate([0,shell_r*2+flange_w*2,journal_t/2])
 //tracer_journal();
-//translate([shell_r+flange_w*3+inner_hole_r,shell_r+flange_w*2+inner_hole_r,retainer_t/2])
-translate([shell_r+flange_w,shell_r+inner_hole_r,retainer_t/2])
+translate([shell_r+flange_w*3+inner_hole_r,shell_r+flange_w*2+inner_hole_r,retainer_t/2])
+//translate([shell_r+flange_w,shell_r+inner_hole_r,retainer_t/2])
 tracer_retainer_ring();
-    
+
+    translate([0,shell_r+flange_w*2+inner_hole_r+4,tracer_pulley_t-tracer_pulley_attach])
+    tracer_key();
 }
 
 
