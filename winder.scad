@@ -8,11 +8,14 @@ include <v_pulleys.scad>
 
 drum_x=-25;
 drum_y=drum_x;
-drum_r=20;
+drum_r=15;
+//drum_r=20;
+drum_d=drum_r*2;
 drum_h=60;
-drum_axle_r=1.25;
+drum_axle_r=1.3;
 drum_axle_h=110;
 drum_spacer_h=12;
+drum_pulley_d = 45;
 
 winder_floor_z = -95;
 winder_ceiling_z =  0;
@@ -26,6 +29,11 @@ reducer2_y = -25;
 
 side_pulley_setback = 37;
 pulley_c_pulldown = 4;
+
+
+// Ratio driveshaft turns : drum turns
+ratio = 1 / ( (reducer_d2/reducer_d1)*(reducer_d2/reducer_d1)*(reducer_d2/drum_pulley_d)*(drum_d/drum_pulley_d) );
+
 
 module center_pulley_roller_translate_a(angle=center_pulley_angle,r=center_pulley_r) {
     translate([0,0,r])
@@ -124,16 +132,16 @@ module drum(neg=false) {
     difference() {
        drum_translate()
        union() {
-            cylinder(r=drum_r,h=drum_h,center=true);
+            cylinder(r1=drum_r*.97,r2=drum_r,h=drum_h,center=true);
             translate([0,0,drum_h/2-2.5])
-                belt_pulley(d=drum_r*2+6);
+                belt_pulley(d=drum_pulley_d, angle=70);
         }
         drum_axle(tol=.5);
         // for tying onto
         drum_translate()
         translate([0,drum_r/2,-2.5])
         rotate(45,x_axis)
-        cube([drum_r*2+1,6,6], center=true);
+        cube([drum_r*2+1,drum_r*.4,drum_r*.4], center=true);
     }
     
 }
@@ -152,7 +160,9 @@ module strut_drum() {
         translate([0,0,winder_floor_z])
         reducer_translate()
         reducer_bolt(tol=1);
-    }
+        translate([0,0,winder_floor_z])
+        reducer2_translate()
+        reducer_bolt(tol=1);    }
 }
 
 module strut_roller_c() {
@@ -185,14 +195,17 @@ module reducer_translate() {
     translate([reducer_x,reducer_y,-winder_floor_z-strut_t/2-6.5])
     children();
 }
-
+module reducer2_translate() {
+    translate([reducer2_x,reducer2_y,-winder_floor_z-strut_t/2-6.5])
+    children();
+}
 module reducer2_translate() {
     translate([reducer2_x,reducer2_y,-winder_floor_z-strut_t/2-6.5])
     children();
 }
 
 module reducer() {
-    double_pulley(d1=reducer_d1, d2=reducer_d2, shaft_d=7);
+    double_pulley(d1=reducer_d1, d2=reducer_d2, shaft_d=7, angle=70);
 }
 
 
@@ -247,16 +260,19 @@ module winder_assembly() {
 
 winder_assembly();
 
+
+
+
 module to_print() {
-    rotate(180,x_axis)
-        strut_drum();
+    //rotate(180,x_axis)
+    //    strut_drum();
     
      //strut_roller_c();
     
     //strut_center_pulley();
 
-    //rotate(180,x_axis)
-    //drum();
+    rotate(180,x_axis)
+    drum();
     
     //reducer();
     
@@ -268,3 +284,4 @@ module to_print() {
 }
 //to_print();
 
+echo("Drum ratio: ", ratio, ":1");
