@@ -16,11 +16,12 @@ drum_axle_r=1.3;
 drum_axle_h=110;
 drum_spacer_h=12;
 drum_pulley_d = 45;
+winder_drive_pulley_d = 20;
 
 winder_floor_z = -95;
 winder_ceiling_z =  0;
 reducer_d1 = 60;
-reducer_d2 = 20;
+reducer_d2 = 17;
 reducer_x = 0;
 reducer_y = 35;
 reducer2_x = 35;
@@ -32,7 +33,7 @@ pulley_c_pulldown = 4;
 
 
 // Ratio driveshaft turns : drum turns
-ratio = 1 / ( (reducer_d2/reducer_d1)*(reducer_d2/reducer_d1)*(reducer_d2/drum_pulley_d)*(drum_d/drum_pulley_d) );
+ratio = 1 / ( (winder_drive_pulley_d/reducer_d1)*(reducer_d2/reducer_d1)*(reducer_d2/drum_pulley_d)*(drum_d/drum_pulley_d) );
 
 
 module center_pulley_roller_translate_a(angle=center_pulley_angle,r=center_pulley_r) {
@@ -258,7 +259,7 @@ module winder_assembly() {
 
 }
 
-winder_assembly();
+//winder_assembly();
 
 
 
@@ -271,10 +272,10 @@ module to_print() {
     
     //strut_center_pulley();
 
-    rotate(180,x_axis)
-    drum();
+    //rotate(180,x_axis)
+    //drum();
     
-    //reducer();
+    reducer();
     
     //strut_center_pulley();
 
@@ -282,6 +283,6 @@ module to_print() {
     //    drum();
     //roller();
 }
-//to_print();
+to_print();
 
 echo("Drum ratio: ", ratio, ":1");
