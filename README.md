@@ -1,5 +1,5 @@
 # vysko
-[![Promising results...](https://img.youtube.com/vi/EKHszj4jTb0/0.jpg)](https://www.youtube.com/watch?v=EKHszj4jTb0)
+[![Promising results...](https://img.youtube.com/vi/EKHszj4jTb0/0.jpg)](https://www.youtube.com/watch?v=EKHszj4jTb0) It's a video!  Click it!
 
 ![Vysko Version 1](https://github.com/jesseparker/vysko/blob/master/img/vysko.jpg?raw=true)
 
