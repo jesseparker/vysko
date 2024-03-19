@@ -1,4 +1,5 @@
 # vysko
+[![Promising results...](https://img.youtube.com/vi/EKHszj4jTb0/0.jpg)](https://www.youtube.com/watch?v=EKHszj4jTb0) It's a video!  Click it!
 
 ![Vysko Version 1](https://github.com/jesseparker/vysko/blob/master/img/vysko.jpg?raw=true)
 
@@ -24,10 +25,16 @@ In addition to several copies of several printed parts you will need:
 - 2 2mm shaft 10 cm long
 - 3 608 bearings ("skateboard bearings")
 - 2 mm round polyurethane belt ~ 2 meters
-- 1 1/4" 1 1/2" bolt
+- 2 1/4" 1 1/2" bolt
 - 1 8" x 8" x 3/4" plywood baseplate
 - 1000 yards cotton sewing thread
 - Meal (pyrotechnic composition)
+- ~ 130 1/4" nuts
+- ~ 200 #12 flat washers
+- ~ 20 5/16" nuts
+- ~ 20 1/4" flat washers
+
+NB: the bearings are printed parts
 
 Not much documentation available at this time!  Good luck!
 
