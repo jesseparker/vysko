@@ -12,8 +12,7 @@ module roller(r=center_pulley_r, t=center_pulley_t, angle=center_pulley_angle, t
         belt_pulley(
             d = center_pulley_r*2,
             shaft_d=center_pulley_axle_r+tol/2,
-            belt_width=2,
-            slope=.5,
+            belt_d=2,
             t=t
         );
                     cylinder(r=center_pulley_axle_r+tol/2, h= center_pulley_axle_l, center=true);

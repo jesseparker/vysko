@@ -4,8 +4,8 @@ include <tracer_bearing.scad>
 
 
 module tracer_plate(t=2) {
-    
-translate([0,0,0]) {
+rotate(180,[1,0,0])
+translate([0,0,-t]) {
     translate([0,0,tracer_pulley_t-tracer_pulley_attach])
     //rotate(15,[0,0,1])
     tracer_connect_tabs();
@@ -42,6 +42,6 @@ for (i = [1:spinners] ) {
 }
 
 //rotate(180,[1,0,0])
-//tracer_plate();
+tracer_plate();
 
 

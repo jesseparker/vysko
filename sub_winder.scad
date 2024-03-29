@@ -26,6 +26,7 @@ reducer_x = 0;
 reducer_y = 35;
 reducer2_x = 35;
 reducer2_y = -25;
+
 // TODO  Should the drum should move outward further?
 
 side_pulley_setback = 37;
@@ -91,6 +92,7 @@ module strut_center_pulley(roller_r = center_pulley_r, roller_t=center_pulley_t,
     //bore
 
 }
+//!strut_center_pulley();
 
 module roller_post(r=center_pulley_r, t=center_pulley_t, h=0, angle=center_pulley_angle ) {
      difference() {
@@ -213,26 +215,32 @@ module reducer() {
 
 
 module winder_assembly() {
-    frame_rods();
+    //frame_rods();
     
     translate([0,0,winder_ceiling_z]) {
-        strut_center_pulley();
+        rotate(180,[1,0,0])
+            strut_center_pulley();
+        rotate(180,[1,0,0])
         center_pulley_roller_translate_a()
             roller(tol=1);
        // center_pulley_roller_translate_b()
        //     roller();
     }
  
-     translate([0,0,-winder_floor_z/2-10]) {
-        strut_roller_c();
-        center_pulley_roller_translate_c()
-        roller();
+     translate([0,0,winder_floor_z/2+10]) {
+        rotate(180,[1,0,0])
+            strut_roller_c();
+        rotate(180,[1,0,0])
+            center_pulley_roller_translate_c()
+                roller();
     }
     
-    translate([0,0,-winder_floor_z])
+    translate([0,0,winder_floor_z])
+    rotate(180,[1,0,0])
         strut_drum();
     // reducer
-    reducer_translate()
+    rotate(180,[1,0,0])
+        reducer_translate()
     rotate(180,[1,0,0])
     {
         reducer();
@@ -240,6 +248,7 @@ module winder_assembly() {
         reducer_bolt();
     }
     
+    rotate(180,[1,0,0])
     reducer2_translate()
     rotate(180,[1,0,0])
     {
@@ -250,16 +259,20 @@ module winder_assembly() {
         reducer_bolt();
     }
 
-    drum();
+    rotate(180,[1,0,0])
+        drum();
+    rotate(180,[1,0,0])
     drum_axle();
    
+       rotate(180,[1,0,0])
         translate([drive_position_x,drive_position_y,-winder_floor_z-12])
     belt_pulley();
 
-
+    translate([0,0,winder_floor_z-strut_t])
+    strut_side();
 }
 
-//winder_assembly();
+winder_assembly();
 
 
 

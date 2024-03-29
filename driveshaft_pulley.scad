@@ -8,7 +8,7 @@ module driveshaft_pulley(d=20) {
             belt_pulley(
                 d = d,
                 shaft_d=drive_axle_r*2,
-                belt_width=3,
+                belt_d=2,
                 t = 6,
                 wedge_factor=.5
             );
@@ -18,4 +18,4 @@ module driveshaft_pulley(d=20) {
     }
 }
 
-//driveshaft_pulley(d=18);
+driveshaft_pulley(d=18);

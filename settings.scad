@@ -60,3 +60,9 @@ center_pulley_axle_l = 30;
 
 spinner_center_hole_r = 35;
 tracer_center_hole_r = 55;
+
+funnel_h = 70;
+funnel_r = 50;
+funnel_wall = 2.5;
+funnel_flange = 3;
+funnel_flange_t = 1;

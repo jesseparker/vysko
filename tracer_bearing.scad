@@ -104,7 +104,7 @@ module tracer_inner_shell() {
     belt_pulley(
         d = shell_r*2-4,
         shaft_d=inner_hole_r*2,
-        belt_width=2,
+        belt_d=2,
         t= tracer_pulley_t,
         wedge_factor=.4
     );
@@ -135,17 +135,18 @@ module tracer_bearing_assembly() {
 //intersection() {
 //translate([0,0,shell_t+journal_t/2+journal_tolerance_z/2])
 //tracer_outer_shell();
-
+    rotate(180,[1,0,0])
     translate([0,0,-shell_t-journal_t/2-journal_tolerance_z/2]) {
-    tracer_inner_shell();
+        tracer_inner_shell();
 
- //  translate_retainer()
- // tracer_retainer_ring();
-}
+        translate_retainer()
+            tracer_retainer_ring();
+    }
 
 //color("red")
+    rotate(180,[1,0,0])
 translate([0,0,-shell_t-journal_t/2-journal_tolerance_z/2-tracer_pulley_t+tracer_pulley_attach-1])
-!tracer_key(tol=3);
+tracer_key(tol=3);
    // }
 
 //tracer_journal();
@@ -153,7 +154,7 @@ translate([0,0,-shell_t-journal_t/2-journal_tolerance_z/2-tracer_pulley_t+tracer
 
 }
 //tracer_center_hole();
-tracer_bearing_assembly();
+//tracer_bearing_assembly();
 
 module tracer_bearing_print_all() {
 translate([0,0,0])

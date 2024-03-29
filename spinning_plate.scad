@@ -111,7 +111,7 @@ spinner_insert(center_hole=2);
 // "spinning_plate_ccw"
 //spinning_plate(num_spools=8, diameter=110, ccw=1, show_spools=false);
 // "spinning_plate_cw"
-spinning_plate(num_spools=8, diameter=110, center_hole = 3,ccw=-1,ashow_spools=true);
+spinning_plate(num_spools=8, diameter=110, center_hole = 3,ccw=-1,show_spools=true);
 
 //translate([0,0,-10])
 //rotate(180,[1,0,0])

@@ -103,7 +103,7 @@ module spinner_inner_shell() {
     belt_pulley(
         d = shell_r*2-4,
         shaft_d=inner_hole_r*2,
-        belt_width=2,
+        belt_d=2,
         t= spinner_pulley_t,
         wedge_factor=.4
     );

@@ -1,22 +1,14 @@
-include <tracer_bearing.scad>
-include <strut.scad>
-//use <rb-pulleys.scad>
-//use <rods.scad>
+include <settings.scad>
+use <strut.scad>
 
 $fn=40;
-//tracer_bearing_assembly();
-funnel_h = 70;
-funnel_r = 50;
-funnel_wall = 2.5;
-funnel_flange = 3;
-funnel_flange_t = 1;
+
+module funnel(h=funnel_h, r1 = funnel_r, r2=0, hole_r=1.7, wall = 2.5) {
 
 angle=90-atan((funnel_r)/funnel_h);
 cone_displacement = funnel_wall/sin(angle);
 
-module funnel(h=funnel_h, r1 = funnel_r, r2=0, hole_r=1.7, wall = 2.5) {
-
-translate([0,0,h/2])
+translate([0,0,-h/2+strut_t/2+funnel_flange_t])
 difference() {
     union() {
         translate([0,0,h/2-funnel_flange_t/2])
@@ -32,6 +24,7 @@ difference() {
 
 
 module funnel_strut(h=70, r1 = 50, r2=0, hole_r=1.7, wall = 2.5) {
+
     difference() {
 
     //
@@ -42,7 +35,7 @@ module funnel_strut(h=70, r1 = 50, r2=0, hole_r=1.7, wall = 2.5) {
 }
 
 //intersection() {
-translate([0,0,funnel_h-strut_t/2-1])
+//translate([0,0,funnel_h-strut_t/2-1])
 funnel_strut();
 
 //!rotate(180,[1,0,0])

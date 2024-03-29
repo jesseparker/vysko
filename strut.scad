@@ -193,6 +193,7 @@ module strut_mono(x=frame_x, y=frame_y, z=5, r = frame_rod_r*1.5, meat_factor=1.
 }
 
 module strut_side(x=frame_x, y=frame_y, z=strut_t, r = frame_rod_r, ring_r=10, meat_factor=1, square_factor = 0.7, ring_translate = [0,0,0],do_bearing = 1) {
+rotate(180,[1,0,0])
     difference() {
         union() {
             difference() {
@@ -265,4 +266,4 @@ module strut_spinner(x=frame_x, y=frame_y, z=strut_t, r = frame_rod_r, spreader_
  
 }
 }
-//strut_spinner();
+//!strut_spinner();
