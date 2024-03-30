@@ -25,6 +25,6 @@ translate([0,0,-100])
         
  use <sub_winder.scad>
  
- translate([0,0,-150])
+ translate([0,0,-130])
     winder_assembly();
  

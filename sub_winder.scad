@@ -1,10 +1,12 @@
 include <settings.scad>
 include <jplib.scad>
-include <strut.scad>
+use <strut.scad>
 include <roller.scad>
 include <bearing.scad>
 include <nuts_washers.scad>
 include <v_pulleys.scad>
+use <sub_sidestrut.scad>
+
 
 drum_x=-25;
 drum_y=drum_x;
@@ -20,6 +22,7 @@ winder_drive_pulley_d = 20;
 
 winder_floor_z = -95;
 winder_ceiling_z =  0;
+winder_strut_t = strut_t + 2;
 reducer_d1 = 60;
 reducer_d2 = 17;
 reducer_x = 0;
@@ -153,7 +156,7 @@ module strut_drum() {
     difference() {
         union() {
             rotate(180,[1,0,0])
-            strut_solid(meat_factor=2,z=strut_t+2);
+            strut_solid(meat_factor=2,z=winder_strut_t);
             translate([drum_x,drum_y,-drum_spacer_h/2-strut_t/2+smidge])
             cylinder(r=4, h=drum_spacer_h, center=true);
         }
@@ -262,14 +265,15 @@ module winder_assembly() {
     rotate(180,[1,0,0])
         drum();
     rotate(180,[1,0,0])
-    drum_axle();
+        drum_axle();
    
-       rotate(180,[1,0,0])
+    rotate(180,[1,0,0])
         translate([drive_position_x,drive_position_y,-winder_floor_z-12])
-    belt_pulley();
+            belt_pulley();
 
-    translate([0,0,winder_floor_z-strut_t])
-    strut_side();
+    translate([0,0,winder_floor_z-winder_strut_t/2])
+        sub_sidestrut();
+
 }
 
 winder_assembly();

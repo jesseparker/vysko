@@ -9,3 +9,5 @@ funnel();
 funnel_strut();
 
 }
+
+sub_funnel();

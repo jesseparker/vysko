@@ -6,7 +6,7 @@ use <spinning_plate.scad>
     
 use <spinner_bearing.scad>
 use <driveshaft_pulley.scad>
-
+use <sub_sidestrut.scad>
 
 module sub_spinner() {
 
@@ -23,12 +23,8 @@ module sub_spinner() {
         spinner_strut_part();
 
 
-    translate([0,0,-strut_t])
-        strut_side();
-    
-    translate([drive_position_x,0,-drive_axle_bearing_t/2-bearing_pillow_side_t-strut_t/2])
-        rotate(-90,[0,0,1])  
-            bearing_pillow_top();
+    translate([0,0,-strut_t/2])
+        sub_sidestrut();
 
     translate([drive_position_x,drive_position_y,6])
         driveshaft_pulley();
