@@ -7,7 +7,7 @@ use <driveshaft_pulley.scad>
 
 use <tracer_bearing.scad>
 use <tracer_plate.scad>
-use <strut.scad>
+//use <strut.scad>
 use <strut_tracer.scad>
 use <sub_sidestrut.scad>
 

@@ -133,8 +133,9 @@ module tracer_retainer_ring() {
 module tracer_bearing_assembly() {
     
 //intersection() {
-//translate([0,0,shell_t+journal_t/2+journal_tolerance_z/2])
-//tracer_outer_shell();
+    rotate(180,[1,0,0])
+translate([0,0,shell_t+journal_t/2+journal_tolerance_z/2])
+tracer_outer_shell();
     rotate(180,[1,0,0])
     translate([0,0,-shell_t-journal_t/2-journal_tolerance_z/2]) {
         tracer_inner_shell();
@@ -154,7 +155,7 @@ tracer_key(tol=3);
 
 }
 //tracer_center_hole();
-//tracer_bearing_assembly();
+tracer_bearing_assembly();
 
 module tracer_bearing_print_all() {
 translate([0,0,0])
