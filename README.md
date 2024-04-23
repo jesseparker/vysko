@@ -3,6 +3,8 @@
 
 ![Vysko Version 1](https://github.com/jesseparker/vysko/blob/master/img/vysko.jpg?raw=true)
 
+![OpenSCAD Model](https://github.com/jesseparker/vysko/blob/master/assembly.png?raw=true)
+
 Open Source Fuse Machines
 
 2 machines are included here:
@@ -34,7 +36,6 @@ In addition to several copies of several printed parts you will need:
 - ~ 20 5/16" nuts
 - ~ 20 1/4" flat washers
 
-NB: the bearings are printed parts
 
 Not much documentation available at this time!  Good luck!
 
