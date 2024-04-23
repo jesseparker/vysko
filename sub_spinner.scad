@@ -30,7 +30,7 @@ module sub_spinner() {
         sub_sidestrut();
 
     translate([drive_position_x,drive_position_y,6])
-        driveshaft_pulley();
+        driveshaft_pulley(d=60);
    
 }
 
