@@ -18,7 +18,7 @@ strut_tracer();
 tracer_bearing_assembly();
 
 translate([0,0,13])
-    tracer_plate();
+    tracer_plate(show_spools = true);
 
 translate([0,0,-strut_t/2])
     sub_sidestrut();

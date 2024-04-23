@@ -150,7 +150,7 @@ spinner_journal();
 
 }
 //spinner_center_hole();
-//spinner_bearing_assembly();
+spinner_bearing_assembly();
 
 module spinner_bearing_print_all() {
 translate([0,0,0])

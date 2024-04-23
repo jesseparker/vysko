@@ -16,7 +16,10 @@ module sub_spinner() {
     
     translate([0,0,13])
         //rotate(180,[0,1,0])
-        spinning_plate();
+        spinning_plate(show_spools=true);
+
+    translate([0,0,13])
+        spinner_insert(center_hole=2);
    
     translate([0,0,0]) 
         //rotate(180,[0,1,0])
@@ -28,7 +31,7 @@ module sub_spinner() {
 
     translate([drive_position_x,drive_position_y,6])
         driveshaft_pulley();
-    
+   
 }
 
 sub_spinner();

@@ -155,7 +155,7 @@ tracer_key(tol=3);
 
 }
 //tracer_center_hole();
-tracer_bearing_assembly();
+//tracer_bearing_assembly();
 
 module tracer_bearing_print_all() {
 translate([0,0,0])

@@ -2,15 +2,16 @@ include <settings.scad>
 include <jplib.scad>
 include <spinner_bearing.scad>
 use <spool.scad>
-        insert_z = 5;
-    i_tol=1;
-    height = spool_h*.7;
-    
-    $fa=2; $fs=1;
+
+insert_z = 5;
+i_tol=1;
+height = spool_h*.7;
+
+$fa=2; $fs=1;
     
 module spinning_plate(
-    num_spools=5,
-    diameter=100,
+    num_spools=9,
+    diameter=110,
     t=3,
     center_hole = 3,
     h=height,
@@ -65,8 +66,8 @@ module insert_translate() {
 }
 
 module spinner_insert(
-    num_spools=8,
-    diameter=100,
+    num_spools=9,
+    diameter=110,
     t=3,
     center_hole = 3,
     h=height,
@@ -109,10 +110,7 @@ spinner_insert(center_hole=2);
 
 //translate([0,0,-40])
 // "spinning_plate_ccw"
-//spinning_plate(num_spools=8, diameter=110, ccw=1, show_spools=false);
+//spinning_plate(ccw=1, show_spools=true);
 // "spinning_plate_cw"
-spinning_plate(num_spools=8, diameter=110, center_hole = 3,ccw=-1,show_spools=true);
+spinning_plate(show_spools=true);
 
-//translate([0,0,-10])
-//rotate(180,[1,0,0])
-//tracer_inner_shell();
